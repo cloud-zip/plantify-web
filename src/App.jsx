@@ -1182,7 +1182,7 @@ async function fetchJson(url, options = {}) {
     headers['apikey'] = anonKey;
   }
 
-  if (sessionToken) {
+  if (sessionToken && sessionToken !== 'admin_demo_token') {
     headers['Authorization'] = `Bearer ${sessionToken}`;
   } else if (anonKey) {
     headers['Authorization'] = `Bearer ${anonKey}`;
@@ -1206,6 +1206,14 @@ async function fetchJson(url, options = {}) {
 }
 
 async function queueRelayCommand(action, durationMinutes, reason) {
+  try {
+    const raw = localStorage.getItem('plantai_settings');
+    const parsed = raw ? JSON.parse(raw) : {};
+    if (parsed.virtualDataMock) {
+      return { message: `Demo Mode: Motor ${action.toUpperCase()} command successfully queued (Mocked).` };
+    }
+  } catch {}
+
   const url = endpoint('relay-approve');
   if (!url) throw new Error('Supabase endpoint is not set. Open Settings → Supabase Endpoint.');
   const cleanAction = action === 'off' ? 'off' : 'on';
@@ -1369,7 +1377,168 @@ function aiContext(data, weather, settings, aggregatedReadings = []) {
 }
 
 async function directAi(settings, messages, options = {}) {
-  if (!settings.apiKey) throw new Error('Add an AI API key in Settings first.');
+  if (settings.virtualDataMock) {
+    if (options.json) {
+      const lang = settings.language || 'en';
+      const mockPlans = {
+        en: {
+          thinking_reasoning: "Analyzing crop profile for Pearl Millet under Indian summer conditions. Soil moisture is at 54% (safe zone). Temperature is 26.5°C. Recommending regular inspection, light watering on Day 2 and Day 5, and NPK nutrients on Day 4.",
+          summary: "Pearl Millet crop is stable. Weather conditions are safe. Proceed with standard care and weeding.",
+          weatherRisk: "No severe weather warning. Moderate wind speeds and humidity.",
+          wateringPlan: {
+            action: "Water moderately",
+            waterVolumeLiters: 10,
+            motorDurationSeconds: 10,
+            durationMinutes: 10,
+            confidence: 96,
+            reason: "Irrigation scheduled to maintain optimal root zone moisture."
+          },
+          fertilizerPlan: {
+            company: "IFFCO",
+            product: "Soluble NPK (19-19-19)",
+            recommendation: "Apply as a foliar spray in the early morning.",
+            sprayVolumeLiters: 15,
+            dose: "75g total",
+            confidence: 90
+          },
+          sevenDaySchedule: [
+            { day: "Day 1", task: "Moisture Log", description: "Log sensor readings and ensure probe is clear.", category: "Soil", priority: "Low", durationMinutes: 5 },
+            { day: "Day 2", task: "Drip Irrigation", description: "Supply 10L water via drip system.", category: "Watering", priority: "High", durationMinutes: 10 },
+            { day: "Day 3", task: "Weed Control", description: "Clear small weeds around crop row base.", category: "Inspection", priority: "Medium", durationMinutes: 15 },
+            { day: "Day 4", task: "Foliar Nutrition", description: "Spray IFFCO NPK 19-19-19 solution.", category: "Nutrients", priority: "High", durationMinutes: 20 },
+            { day: "Day 5", task: "Irrigation Run", description: "Supply 5L water.", category: "Watering", priority: "Medium", durationMinutes: 5 },
+            { day: "Day 6", task: "Pest Scan", description: "Inspect crop stalks for stem borers.", category: "Inspection", priority: "High", durationMinutes: 10 },
+            { day: "Day 7", task: "Weekly Review", description: "Examine health history graphs.", category: "Review", priority: "Low", durationMinutes: 10 }
+          ],
+          relayRecommendation: {
+            action: "off",
+            durationMinutes: 0,
+            motorDurationSeconds: 0,
+            waterVolumeLiters: 0,
+            safety: "Soil moisture is safe."
+          },
+          extraNotes: [
+            "Check soil moisture manually before running extra irrigation cycles.",
+            "Avoid spray applications during peak sunlight hours."
+          ]
+        },
+        hi: {
+          thinking_reasoning: "भारतीय गर्मी की स्थिति में बाजरा फसल का विश्लेषण। मिट्टी में नमी ५४% (सुरक्षित क्षेत्र) है। तापमान २६.५ डिग्री सेल्सियस है। नियमित निरीक्षण, दूसरे और पांचवें दिन हल्की सिंचाई और चौथे दिन एनपीके पोषक तत्वों की सिफारिश।",
+          summary: "बाजरा की फसल स्थिर है। मौसम की स्थिति सुरक्षित है। सामान्य देखभाल और निराई-गुड़ाई जारी रखें।",
+          weatherRisk: "मौसम की कोई गंभीर चेतावनी नहीं है। मध्यम हवा की गति और आर्द्रता।",
+          wateringPlan: {
+            action: "मध्यम पानी दें",
+            waterVolumeLiters: 10,
+            motorDurationSeconds: 10,
+            durationMinutes: 10,
+            confidence: 96,
+            reason: "इष्टतम जड़ क्षेत्र नमी बनाए रखने के लिए सिंचाई निर्धारित की गई है।"
+          },
+          fertilizerPlan: {
+            company: "इफको (IFFCO)",
+            product: "घुलनशील एनपीके (19-19-19)",
+            recommendation: "सुबह जल्दी पत्तियों पर छिड़काव करें।",
+            sprayVolumeLiters: 15,
+            dose: "कुल ७५ ग्राम",
+            confidence: 90
+          },
+          sevenDaySchedule: [
+            { day: "दिन १", task: "नमी लॉग", description: "सेंसर रीडिंग रिकॉर्ड करें और जांचें कि प्रोब साफ है।", category: "Soil", priority: "Low", durationMinutes: 5 },
+            { day: "दिन २", task: "ड्रिप सिंचाई", description: "ड्रिप सिस्टम के माध्यम से १० लीटर पानी की आपूर्ति करें।", category: "Watering", priority: "High", durationMinutes: 10 },
+            { day: "दिन ३", task: "खरपतवार नियंत्रण", description: "फसल की क्यारी के आसपास छोटे खरपतवार साफ करें।", category: "Inspection", priority: "Medium", durationMinutes: 15 },
+            { day: "दिन ४", task: "पर्णीय पोषण", description: "इफको एनपीके 19-19-19 घोल का छिड़काव करें।", category: "Nutrients", priority: "High", durationMinutes: 20 },
+            { day: "दिन ५", task: "सिंचाई चक्र", description: "५ लीटर पानी की आपूर्ति करें।", category: "Watering", priority: "Medium", durationMinutes: 5 },
+            { day: "दिन ६", task: "कीट नियंत्रण", description: "तना छेदक कीटों के लिए फसल के डंठल की जांच करें।", category: "Inspection", priority: "High", durationMinutes: 10 },
+            { day: "दिन ७", task: "साप्ताहिक समीक्षा", description: "स्वास्थ्य इतिहास ग्राफ़ का निरीक्षण करें।", category: "Review", priority: "Low", durationMinutes: 10 }
+          ],
+          relayRecommendation: {
+            action: "off",
+            durationMinutes: 0,
+            motorDurationSeconds: 0,
+            waterVolumeLiters: 0,
+            safety: "मिट्टी की नमी सुरक्षित स्तर पर है।"
+          },
+          extraNotes: [
+            "अतिरिक्त सिंचाई चलाने से पहले मिट्टी की नमी की मैन्युअल जांच करें।",
+            "तेज धूप के घंटों के दौरान छिड़काव करने से बचें।"
+          ]
+        },
+        bn: {
+          thinking_reasoning: "ভারতীয় গ্রীষ্মকালীন পরিস্থিতিতে মুক্তা বাজরা ফসলের বিশ্লেষণ। মাটির আর্দ্রতা ৫৪% (নিরাপদ অঞ্চল)। তাপমাত্রা ২৬.৫° সেলসিয়াস। নিয়মিত পরিদর্শন, ২য় এবং ৫ম দিনে হালকা সেচ এবং ৪র্থ দিনে এনপিকে পুষ্টির সুপারিশ।",
+          summary: "মুক্তা বাজরা ফসল স্থিতিশীল। আবহাওয়ার পরিস্থিতি নিরাপদ। সাধারণ পরিচর্যা ও আগাছা পরিষ্কার করা চালিয়ে যান।",
+          weatherRisk: "কোনো মারাত্মক আবহাওয়ার সতর্কতা নেই। মাঝারি বাতাসের গতি এবং আর্দ্রতা।",
+          wateringPlan: {
+            action: "পরিমিত জল সেচ",
+            waterVolumeLiters: 10,
+            motorDurationSeconds: 10,
+            durationMinutes: 10,
+            confidence: 96,
+            reason: "সর্বোত্তম শিকড় অঞ্চলের আর্দ্রতা বজায় রাখার জন্য সেচ নির্ধারিত হয়েছে।"
+          },
+          fertilizerPlan: {
+            company: "ইফকো (IFFCO)",
+            product: "দ্রবণীয় এনপিকে (১৯-১৯-১৯)",
+            recommendation: "ভোরবেলা পাতায় স্প্রে করুন।",
+            sprayVolumeLiters: 15,
+            dose: "মোট ৭৫ গ্রাম",
+            confidence: 90
+          },
+          sevenDaySchedule: [
+            { day: "দিন ১", task: "আর্দ্রতা পরিমাপ", description: "সেন্সর রিডিং পরীক্ষা করুন এবং প্রোব পরিষ্কার রাখুন।", category: "Soil", priority: "Low", durationMinutes: 5 },
+            { day: "দিন ২", task: "ড্রিপ সেচ", description: "ড্রিপ ব্যবস্থার মাধ্যমে ১০ লিটার জল দিন।", category: "Watering", priority: "High", durationMinutes: 10 },
+            { day: "দিন ৩", task: "আগাছা দমন", description: "ফসলের গোড়ার চারপাশের ছোট আগাছা পরিষ্কার করুন।", category: "Inspection", priority: "Medium", durationMinutes: 15 },
+            { day: "দিন ৪", task: "পাতার পুষ্টি", description: "ইফকো এনপিকে ১৯-১৯-১৯ দ্রবণ স্প্রে করুন।", category: "Nutrients", priority: "High", durationMinutes: 20 },
+            { day: "দিন ৫", task: "সেচ পরিচালনা", description: "৫ লিটার জল দিন।", category: "Watering", priority: "Medium", durationMinutes: 5 },
+            { day: "দিন ৬", task: "পোকামাকড় পরীক্ষা", description: "কান্ডের মাজরা পোকার জন্য ফসল পরীক্ষা করুন।", category: "Inspection", priority: "High", durationMinutes: 10 },
+            { day: "দিন ৭", task: "সাপ্তাহিক পর্যালোচনা", description: "স্বাস্থ্য ইতিহাসের গ্রাফগুলি পরীক্ষা করুন।", category: "Review", priority: "Low", durationMinutes: 10 }
+          ],
+          relayRecommendation: {
+            action: "off",
+            durationMinutes: 0,
+            motorDurationSeconds: 0,
+            waterVolumeLiters: 0,
+            safety: "মাটির আর্দ্রতা নিরাপদ স্তরে রয়েছে।"
+          },
+          extraNotes: [
+            "অতিরিক্ত সেচ চক্র চালানোর আগে মাটির আর্দ্রতা পরীক্ষা করে নিন।",
+            "তীব্র সূর্যালোকের সময় স্প্রে করা এড়িয়ে চলুন।"
+          ]
+        }
+      };
+      const plan = mockPlans[lang] || mockPlans.en;
+      return JSON.stringify(plan);
+    } else {
+      const userText = messages[messages.length - 1]?.content || '';
+      const lowercase = userText.toLowerCase();
+      const lang = settings.language || 'en';
+      if (lang === 'hi') {
+        if (lowercase.includes('पानी') || lowercase.includes('सिंचाई')) {
+          return "नमस्ते! बाजरा फसल के लिए, वर्तमान मिट्टी की नमी ५४% है जो सुरक्षित है। आपको २ दिनों में ड्रिप सिस्टम के माध्यम से लगभग १० लीटर पानी देना चाहिए।";
+        }
+        if (lowercase.includes('उर्वरक') || lowercase.includes('खाद')) {
+          return "पोषक तत्वों की कमी को दूर करने के लिए, आप इफको एनपीके १९-१९-१९ (IFFCO NPK 19-19-19) उर्वरक का पत्तियों पर छिड़काव कर सकते हैं। ५ ग्राम प्रति लीटर पानी में मिलाकर सुबह छिड़काव करें।";
+        }
+        return "नमस्ते! मैं आपका प्लांटिफाई एआई सलाहकार हूँ। मैं आपको फसल की देखभाल, सिंचाई और पोषक तत्वों के बारे में सुझाव दे सकता हूँ। (डेमो मोड)";
+      } else if (lang === 'bn') {
+        if (lowercase.includes('জল') || lowercase.includes('সেচ')) {
+          return "নমস্কার! বাজরা ফসলের জন্য মাটির আর্দ্রতা ৫৪% যা নিরাপদ সীমার মধ্যে আছে। পরবর্তী সেচ ২ দিন পর ১০ লিটার জলের পরামর্শ দেওয়া হচ্ছে।";
+        }
+        if (lowercase.includes('সার') || lowercase.includes('এনপিকে')) {
+          return "ফসল বৃদ্ধির জন্য আপনি ইফকো এনপিকে ১৯-১৯-১৯ দ্রবণীয় সার ব্যবহার করতে পারেন। ১ লিটার জলে ৫ গ্রাম সার গুলে স্প্রে করুন।";
+        }
+        return "নমস্কার! আমি আপনার প্ল্যানটিফাই এআই উপদেষ্টা। আমি আপনাকে ফসল চাষ এবং মাটির স্বাস্থ্য সম্পর্কে পরামর্শ দিতে পারি। (ডেমো মোড)";
+      } else {
+        if (lowercase.includes('water') || lowercase.includes('irrigation')) {
+          return "Hello! For your Pearl Millet crop, the soil moisture is currently 54% (healthy). The next watering run is scheduled in 2 days for 10 Liters (10 seconds run).";
+        }
+        if (lowercase.includes('fertilizer') || lowercase.includes('npk')) {
+          return "We suggest applying IFFCO NPK 19-19-19 soluble fertilizer. Mix 5g per liter of water and apply as a foliar spray in the early morning.";
+        }
+        return "Hello! I am your Plantify AI advisor. I can guide you on smart plant irrigation, NPK values, and pest management tips. Feel free to toggle off Demo Mode in settings to connect with a live LLM model!";
+      }
+    }
+  }
+
   const url = `${settings.baseUrl.replace(/\/$/, '')}/chat/completions`;
   const body = {
     model: settings.model,
@@ -4445,10 +4614,11 @@ function Settings({ settings, setSettings, reloadWeather, weather }) {
   );
 }
 
-// ---------------- LOGIN SCREEN ----------------
 function LoginScreen({ settings, setSettings, onLoginSuccess }) {
+  const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPass, setShowPass] = useState(false);
@@ -4465,6 +4635,22 @@ function LoginScreen({ settings, setSettings, onLoginSuccess }) {
     setLoading(true);
     setErrorMsg('');
     try {
+      // 1. Admin/Demo Account Bypass
+      if (email.trim() === 'a@a.com' && password.trim() === 'a') {
+        localStorage.setItem('plantify_user_token', 'admin_demo_token');
+        localStorage.setItem('plantify_user_email', 'a@a.com');
+        
+        // Auto-enable mock telemetry by default for demo ease
+        const current = loadSettings();
+        const nextSettings = { ...current, virtualDataMock: true };
+        saveSettings(nextSettings);
+        setSettings(nextSettings);
+        
+        onLoginSuccess();
+        return;
+      }
+      
+      // 2. Real Account Login
       const res = await fetch(`${supabaseUrl}/auth/v1/token?grant_type=password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'apikey': anonKey },
@@ -4482,99 +4668,204 @@ function LoginScreen({ settings, setSettings, onLoginSuccess }) {
     }
   };
 
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    setErrorMsg('Deactivated: Sign-up is currently in development progress. Please create an issue on the repository to request an account.');
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center p-5">
       <div className="w-full max-w-sm">
 
         {/* Logo */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-8">
           <div
-            className="w-20 h-20 mx-auto mb-4 rounded-3xl flex items-center justify-center shadow-2xl"
+            className="w-16 h-16 mx-auto mb-3 rounded-2xl flex items-center justify-center shadow-2xl"
             style={{ background: 'linear-gradient(135deg, var(--accent-color) 0%, #2d5a27 100%)' }}
           >
-            <span className="material-symbols-outlined text-4xl text-black" style={{ fontVariationSettings: "'FILL' 1" }}>forest</span>
+            <span className="material-symbols-outlined text-3xl text-black" style={{ fontVariationSettings: "'FILL' 1" }}>forest</span>
           </div>
-          <h1 className="text-3xl font-black tracking-tight" style={{ color: 'var(--accent-color)' }}>Plantify</h1>
-          <p className="text-xs text-gray-500 mt-1 tracking-widest uppercase">Smart Farm Dashboard</p>
+          <h1 className="text-2xl font-black tracking-tight" style={{ color: 'var(--accent-color)' }}>Plantify</h1>
+          <p className="text-[10px] text-gray-500 mt-1 tracking-widest uppercase">Smart Farm Dashboard</p>
         </div>
 
         {/* Card */}
-        <div className="bg-white/[0.04] border border-white/10 rounded-3xl p-7 shadow-2xl backdrop-blur-xl space-y-5">
-          <div>
-            <h2 className="text-lg font-bold text-white">Welcome back</h2>
-            <p className="text-xs text-gray-500 mt-0.5">Sign in to access your dashboard</p>
+        <div className="bg-white/[0.04] border border-white/10 rounded-3xl p-6 shadow-2xl backdrop-blur-xl space-y-4">
+          
+          {/* Sign In / Sign Up Selector Switcher */}
+          <div className="flex border border-white/5 bg-black/30 rounded-xl p-1">
+            <button
+              type="button"
+              onClick={() => { setIsSignUp(false); setErrorMsg(''); }}
+              className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all duration-300 cursor-pointer ${!isSignUp ? 'bg-white/10 text-white shadow-md' : 'text-gray-500 hover:text-gray-300'}`}
+            >
+              Sign In
+            </button>
+            <button
+              type="button"
+              onClick={() => { setIsSignUp(true); setErrorMsg(''); }}
+              className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all duration-300 cursor-pointer ${isSignUp ? 'bg-white/10 text-white shadow-md' : 'text-gray-500 hover:text-gray-300'}`}
+            >
+              Sign Up
+            </button>
           </div>
 
-          {errorMsg && (
-            <div className="flex items-start gap-2.5 p-3 bg-red-950/50 border border-red-800/40 rounded-2xl text-xs text-red-300">
-              <span className="material-symbols-outlined text-sm text-red-400 shrink-0 mt-0.5">error</span>
-              {errorMsg}
-            </div>
-          )}
+          <div className="transition-all duration-300">
+            {!isSignUp ? (
+              <div className="space-y-4 animate-fade-in">
+                <div>
+                  <h2 className="text-md font-bold text-white">Welcome back</h2>
+                  <p className="text-[11px] text-gray-500 mt-0.5">Sign in to access your dashboard</p>
+                </div>
 
-          <form onSubmit={handleLogin} className="space-y-4">
-            {/* Email */}
-            <div className="space-y-1.5">
-              <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Email</label>
-              <div className="relative">
-                <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 text-[18px]">alternate_email</span>
-                <input
-                  id="login-email"
-                  type="email"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  placeholder="you@example.com"
-                  disabled={loading}
-                  autoComplete="email"
-                  className="w-full bg-black/30 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[var(--accent-color)]/60 transition-colors"
-                />
+                {errorMsg && (
+                  <div className="flex items-start gap-2.5 p-3 bg-red-950/50 border border-red-800/40 rounded-2xl text-xs text-red-300 leading-relaxed">
+                    <span className="material-symbols-outlined text-sm text-red-400 shrink-0 mt-0.5">error</span>
+                    {errorMsg}
+                  </div>
+                )}
+
+                <form onSubmit={handleLogin} className="space-y-3.5">
+                  {/* Email */}
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Email</label>
+                    <div className="relative">
+                      <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-[18px]">alternate_email</span>
+                      <input
+                        id="login-email"
+                        type="email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        placeholder="you@example.com"
+                        disabled={loading}
+                        autoComplete="email"
+                        className="w-full bg-black/35 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-[var(--accent-color)]/60 transition-colors"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Password */}
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Password</label>
+                    <div className="relative">
+                      <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-[18px]">lock</span>
+                      <input
+                        id="login-password"
+                        type={showPass ? 'text' : 'password'}
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        placeholder="••••••••"
+                        disabled={loading}
+                        autoComplete="current-password"
+                        className="w-full bg-black/35 border border-white/10 rounded-xl pl-9 pr-10 py-2.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-[var(--accent-color)]/60 transition-colors"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPass(v => !v)}
+                        className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
+                        tabIndex={-1}
+                      >
+                        <span className="material-symbols-outlined text-[18px]">{showPass ? 'visibility_off' : 'visibility'}</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    id="login-submit"
+                    disabled={loading}
+                    className="w-full py-3 rounded-xl font-bold text-xs text-black flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer"
+                    style={{ backgroundColor: 'var(--accent-color)', opacity: loading ? 0.7 : 1 }}
+                  >
+                    {loading
+                      ? <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                      : <span className="material-symbols-outlined text-[16px]">login</span>
+                    }
+                    {loading ? 'Signing in…' : 'Sign In'}
+                  </button>
+                </form>
               </div>
-            </div>
+            ) : (
+              <div className="space-y-4 animate-fade-in">
+                <div>
+                  <h2 className="text-md font-bold text-white">Create an Account</h2>
+                  <p className="text-[11px] text-gray-500 mt-0.5">Register a new IoT controller dashboard</p>
+                </div>
 
-            {/* Password */}
-            <div className="space-y-1.5">
-              <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Password</label>
-              <div className="relative">
-                <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 text-[18px]">lock</span>
-                <input
-                  id="login-password"
-                  type={showPass ? 'text' : 'password'}
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  disabled={loading}
-                  autoComplete="current-password"
-                  className="w-full bg-black/30 border border-white/10 rounded-xl pl-10 pr-11 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[var(--accent-color)]/60 transition-colors"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPass(v => !v)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
-                  tabIndex={-1}
-                >
-                  <span className="material-symbols-outlined text-[18px]">{showPass ? 'visibility_off' : 'visibility'}</span>
-                </button>
+                {errorMsg && (
+                  <div className="flex items-start gap-2.5 p-3 bg-red-950/50 border border-red-800/40 rounded-2xl text-xs text-red-300 leading-normal">
+                    <span className="material-symbols-outlined text-sm text-red-400 shrink-0 mt-0.5">error</span>
+                    {errorMsg}
+                  </div>
+                )}
+
+                <form onSubmit={handleSignUp} className="space-y-3.5">
+                  {/* Email */}
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Email Address</label>
+                    <div className="relative">
+                      <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-[18px]">alternate_email</span>
+                      <input
+                        id="signup-email"
+                        type="email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        placeholder="you@example.com"
+                        className="w-full bg-black/35 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-[var(--accent-color)]/60 transition-colors"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Password */}
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Password</label>
+                    <div className="relative">
+                      <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-[18px]">lock</span>
+                      <input
+                        id="signup-password"
+                        type="password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        placeholder="••••••••"
+                        className="w-full bg-black/35 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-[var(--accent-color)]/60 transition-colors"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Confirm Password */}
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Confirm Password</label>
+                    <div className="relative">
+                      <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-[18px]">lock</span>
+                      <input
+                        id="signup-confirm-password"
+                        type="password"
+                        value={confirmPassword}
+                        onChange={e => setConfirmPassword(e.target.value)}
+                        placeholder="••••••••"
+                        className="w-full bg-black/35 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-[var(--accent-color)]/60 transition-colors"
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    id="signup-submit"
+                    className="w-full py-3 rounded-xl font-bold text-xs text-black flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer"
+                    style={{ backgroundColor: 'var(--accent-color)' }}
+                  >
+                    <span className="material-symbols-outlined text-[16px]">person_add</span>
+                    Create Account
+                  </button>
+                </form>
               </div>
-            </div>
-
-            <button
-              type="submit"
-              id="login-submit"
-              disabled={loading}
-              className="w-full py-3.5 rounded-xl font-bold text-sm text-black flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
-              style={{ backgroundColor: 'var(--accent-color)', opacity: loading ? 0.7 : 1 }}
-            >
-              {loading
-                ? <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
-                : <span className="material-symbols-outlined text-[18px]">login</span>
-              }
-              {loading ? 'Signing in…' : 'Sign In'}
-            </button>
-          </form>
+            )}
+          </div>
         </div>
 
-        <p className="text-center text-[11px] text-gray-600 mt-6">
-          © 2026 Plantify · Built by CLOUD 🌨️
+        <p className="text-center text-[10px] text-gray-600 mt-6 leading-normal">
+          © 2026 Plantify · Developed by CLOUD 🌨️<br />
+          Open an issue on the repo to request developer credentials.
         </p>
       </div>
     </div>
@@ -5064,6 +5355,55 @@ export default function App() {
     try {
       setRefreshing(true);
       setError('');
+
+      if (settings.virtualDataMock) {
+        const now = new Date();
+        const mockReadings = [];
+        for (let i = 24; i >= 0; i--) {
+          const t = new Date(now.getTime() - i * 3600000);
+          mockReadings.push({
+            recorded_at: t.toISOString(),
+            soil_moisture_percent: 50 + Math.sin(i / 2) * 5 + (i % 3 === 0 ? 2 : -1),
+            temperature_c: 25 + Math.cos(i / 3) * 2 + (i % 2 === 0 ? 0.5 : -0.5),
+            humidity_percent: 60 + Math.sin(i / 4) * 8,
+            nitrogen_mg_kg: 120 + Math.round(Math.sin(i / 5) * 10),
+            phosphorus_mg_kg: 70 + Math.round(Math.cos(i / 6) * 5),
+            potassium_mg_kg: 160 + Math.round(Math.sin(i / 7) * 8),
+            relay_motor_on: false
+          });
+        }
+        const latestReading = {
+          recorded_at: now.toISOString(),
+          soil_moisture_percent: 54,
+          temperature_c: 26.5,
+          humidity_percent: 58,
+          npk_n: 130,
+          npk_p: 72,
+          npk_k: 158,
+          relay_motor_on: relayOverride !== null ? relayOverride : false
+        };
+        const nextData = {
+          latest: latestReading,
+          readings: mockReadings,
+          plant: {
+            id: '1',
+            device_id: DEVICE_ID,
+            plant_type: settings.plantType || 'millet',
+            plant_name: settings.plantName || 'Pearl Millet',
+            planting_date: settings.plantingDate || '2026-06-01'
+          },
+          device: {
+            id: DEVICE_ID,
+            device_id: DEVICE_ID,
+            auto_watering_enabled: settings.autoWateringEnabled
+          },
+          latestCommandStatus: null
+        };
+        setData(nextData);
+        saveCachedSensorData(nextData);
+        return;
+      }
+
       const json = await fetchJson(`${endpoint('dashboard-data')}?device_id=${DEVICE_ID}`);
       const nextData = {
         latest: json.latest ?? null,
