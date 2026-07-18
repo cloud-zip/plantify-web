@@ -1,3 +1,72 @@
+@import "tailwindcss";
+@import "@heroui/styles";
+
+@theme {
+  --color-on-tertiary-fixed: #191d16;
+  --color-inverse-on-surface: #30312b;
+  --color-surface-container-high: #292a25;
+  --color-tertiary: #ffffff;
+  --color-on-secondary-container: #b8b9b2;
+  --color-background: var(--bg-color);
+  --color-foreground: var(--text-color);
+  --color-primary: var(--accent-color);
+  --color-content1: var(--card-bg);
+  --color-divider: var(--border-color);
+  --color-surface-container-highest: #34352f;
+  --color-error: #ffb4ab;
+  --color-tertiary-container: #e1e4d8;
+  --color-surface-bright: #393a34;
+  --color-surface-container-lowest: #0d0f0a;
+  --color-secondary-container: #484a45;
+  --color-primary-container: #caf300;
+  --color-surface-tint: #b0d500;
+  --color-tertiary-fixed-dim: #c4c8bc;
+  --color-on-tertiary: #2e322a;
+  --color-on-surface-variant: #c5c9ac;
+  --color-on-error-container: #ffdad6;
+  --color-outline: #8f9378;
+  --color-surface: #13140f;
+  --color-secondary-fixed: #e3e3dc;
+  --color-outline-variant: #444932;
+  --color-on-secondary-fixed-variant: #464743;
+  --color-on-secondary: #2f312d;
+  --color-surface-dim: #13140f;
+  --color-on-primary-fixed-variant: #3e4c00;
+  --color-tertiary-fixed: #e1e4d8;
+  --color-on-tertiary-container: #62665c;
+  --color-secondary: #c6c7c0;
+  --color-surface-container-low: #1b1c17;
+  --color-surface-variant: #34352f;
+  --color-on-tertiary-fixed-variant: #44483f;
+  --color-on-background: #e4e3da;
+  --color-on-surface: #e4e3da;
+  --color-on-secondary-fixed: #1a1c18;
+  --color-inverse-surface: #e4e3da;
+  --color-secondary-fixed-dim: #c6c7c0;
+  --color-inverse-primary: #536600;
+  --color-surface-container: #1f201b;
+  --color-on-primary-fixed: #171e00;
+  --color-error-container: #93000a;
+  --color-primary-fixed: #caf300;
+  --color-on-primary-container: #596c00;
+  --color-on-primary: #2a3400;
+  --color-on-error: #690005;
+  --color-primary-fixed-dim: #b0d500;
+  --color-plant-dark: #13140f;
+  --color-plant-card: #1c1e14;
+  --color-plant-lime: #d4ff00;
+  --color-plant-yellow: #e2f600;
+
+  --font-data-unit: "JetBrains Mono", monospace;
+  --font-headline-md: "Libre Caslon Text", serif;
+  --font-data-lg: "Libre Caslon Text", serif;
+  --font-label-sm: "JetBrains Mono", monospace;
+  --font-body-md: "Inter", sans-serif;
+  --font-display-lg: "Libre Caslon Text", serif;
+  --font-serif: "Grand Hotel", serif;
+  --font-sans: "Nunito", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
 
 :root {
   font-family: "Nunito", "Google Sans", system-ui, -apple-system, sans-serif;

@@ -3,6 +3,8 @@ import { XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveContainer, AreaChar
 import Beams from './Beams';
 import PillNav from './PillNav';
 import LocationMap from './LocationMap';
+import { Switch, Tooltip, Tabs } from '@heroui/react';
+
 
 const LZW = {
   decompress(str) {
@@ -2426,14 +2428,19 @@ function Dashboard({ data, weather, refresh, refreshing, error, settings, setSet
         <div className="space-y-3 mb-4 pt-3 border-t border-white/5">
           <div className="flex justify-between items-center mb-6">
             <span className="text-xs text-gray-400 font-bold">{t.keepOn}</span>
-            <label className="relative inline-flex items-center cursor-pointer select-none">
-              <input
-                type="checkbox"
-                checked={keepOnIndefinitely}
-                onChange={(e) => setKeepOnIndefinitely(e.target.checked)}
-                className="rounded border-white/10 text-[var(--accent-color)] bg-[#1c1e14] focus:ring-[var(--accent-color)]"
-              />
-            </label>
+            <Switch
+              selected={keepOnIndefinitely}
+              onSelectionChange={setKeepOnIndefinitely}
+              aria-label={t.keepOn}
+            >
+              {({ isSelected }) => (
+                <Switch.Content>
+                  <Switch.Control className={`h-[24px] w-[44px] rounded-full transition-colors flex items-center ${isSelected ? 'bg-[var(--accent-color)] shadow-[0_0_12px_rgba(212,255,0,0.4)]' : 'bg-white/10'}`}>
+                    <Switch.Thumb className={`size-[18px] rounded-full bg-white transition-all ${isSelected ? 'translate-x-[22px]' : 'translate-x-[2px]'}`} />
+                  </Switch.Control>
+                </Switch.Content>
+              )}
+            </Switch>
           </div>
           
           {!keepOnIndefinitely && (
@@ -2548,7 +2555,13 @@ function Dashboard({ data, weather, refresh, refreshing, error, settings, setSet
         <div className="space-y-3">
           <div className="flex justify-between items-end">
             <div>
-              <h4 className="text-xl font-medium tracking-tight text-white">Nitrogen (N)</h4>
+              <Tooltip delay={0}>
+                <h4 className="text-xl font-medium tracking-tight text-white cursor-help hover:text-[var(--accent-color)] transition-colors">Nitrogen (N)</h4>
+                <Tooltip.Content className="bg-[#1c1e14] border border-white/10 p-3 rounded-2xl text-xs max-w-xs shadow-2xl backdrop-blur-xl">
+                  <p className="font-bold mb-1 text-[var(--accent-color)]">Nitrogen (N)</p>
+                  <p className="text-gray-300 leading-normal">Crucial for vegetative growth, leafy green foliage, and protein synthesis. Promotes deep green colors in pearl millet and tomato plants.</p>
+                </Tooltip.Content>
+              </Tooltip>
               <p className="text-xs text-gray-400 mt-1 max-w-[200px]">Leaf and stem growth. Target: {activeProfile.npk.n.min}-{activeProfile.npk.n.max} mg/kg</p>
             </div>
             <div className="text-right">
@@ -2568,7 +2581,13 @@ function Dashboard({ data, weather, refresh, refreshing, error, settings, setSet
         <div className="space-y-3">
           <div className="flex justify-between items-end">
             <div>
-              <h4 className="text-xl font-medium tracking-tight text-white">Phosphorus (P)</h4>
+              <Tooltip delay={0}>
+                <h4 className="text-xl font-medium tracking-tight text-white cursor-help hover:text-[var(--accent-color)] transition-colors">Phosphorus (P)</h4>
+                <Tooltip.Content className="bg-[#1c1e14] border border-white/10 p-3 rounded-2xl text-xs max-w-xs shadow-2xl backdrop-blur-xl">
+                  <p className="font-bold mb-1 text-[var(--accent-color)]">Phosphorus (P)</p>
+                  <p className="text-gray-300 leading-normal">Essential for root development, seedling strength, flowering, and seed formatting. Boosts early growth and water uptake efficiency.</p>
+                </Tooltip.Content>
+              </Tooltip>
               <p className="text-xs text-gray-400 mt-1 max-w-[200px]">Root development. Target: {activeProfile.npk.p.min}-{activeProfile.npk.p.max} mg/kg</p>
             </div>
             <div className="text-right">
@@ -2588,7 +2607,13 @@ function Dashboard({ data, weather, refresh, refreshing, error, settings, setSet
         <div className="space-y-3">
           <div className="flex justify-between items-end">
             <div>
-              <h4 className="text-xl font-medium tracking-tight text-white">Potassium (K)</h4>
+              <Tooltip delay={0}>
+                <h4 className="text-xl font-medium tracking-tight text-white cursor-help hover:text-[var(--accent-color)] transition-colors">Potassium (K)</h4>
+                <Tooltip.Content className="bg-[#1c1e14] border border-white/10 p-3 rounded-2xl text-xs max-w-xs shadow-2xl backdrop-blur-xl">
+                  <p className="font-bold mb-1 text-[var(--accent-color)]">Potassium (K)</p>
+                  <p className="text-gray-300 leading-normal">Improves drought tolerance, stress resistance, enzyme activation, and overall plant vigor. Helps regulate stomata opening and closing.</p>
+                </Tooltip.Content>
+              </Tooltip>
               <p className="text-xs text-gray-400 mt-1 max-w-[200px]">Stress resistance. Target: {activeProfile.npk.k.min}-{activeProfile.npk.k.max} mg/kg</p>
             </div>
             <div className="text-right">
@@ -3727,12 +3752,19 @@ function Settings({ settings, setSettings, reloadWeather, weather }) {
               <label className="text-xs text-gray-400 block mb-1 font-bold">{t.autoWateringTitle}</label>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs text-white">{t.enableAutoWatering}</span>
-                <input
-                  type="checkbox"
-                  checked={settings.autoWateringEnabled}
-                  onChange={(e) => update({ autoWateringEnabled: e.target.checked })}
-                  className="rounded border-white/10 text-[var(--accent-color)] bg-[#1c1e14] focus:ring-[var(--accent-color)]"
-                />
+                <Switch
+                  selected={settings.autoWateringEnabled}
+                  onSelectionChange={(checked) => update({ autoWateringEnabled: checked })}
+                  aria-label={t.enableAutoWatering}
+                >
+                  {({ isSelected }) => (
+                    <Switch.Content>
+                      <Switch.Control className={`h-[24px] w-[44px] rounded-full transition-colors flex items-center ${isSelected ? 'bg-[var(--accent-color)] shadow-[0_0_12px_rgba(212,255,0,0.4)]' : 'bg-white/10'}`}>
+                        <Switch.Thumb className={`size-[18px] rounded-full bg-white transition-all ${isSelected ? 'translate-x-[22px]' : 'translate-x-[2px]'}`} />
+                      </Switch.Control>
+                    </Switch.Content>
+                  )}
+                </Switch>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-[10px] text-gray-400">{t.moistureThreshold}</span>
@@ -3829,14 +3861,21 @@ function Settings({ settings, setSettings, reloadWeather, weather }) {
                 </select>
               </div>
               <div className="flex flex-col justify-end pb-2">
-                <label className="text-xs text-gray-400 mb-2 font-bold flex items-center gap-2 cursor-pointer select-none">
-                  <input
-                    type="checkbox"
-                    checked={settings.virtualDataMock || false}
-                    onChange={(e) => update({ virtualDataMock: e.target.checked })}
-                    className="rounded border-white/10 text-[var(--accent-color)] bg-[#1c1e14] focus:ring-[var(--accent-color)]"
-                  />
-                  {lang === 'en' ? 'Mock Offline Data' : lang === 'hi' ? 'नकली ऑफ़लाइन डेटा' : 'মক অফলাইন ডেটা'}
+                <label className="text-xs text-gray-400 mb-2 font-bold flex items-center justify-between cursor-pointer select-none w-full">
+                  <span>{lang === 'en' ? 'Mock Offline Data' : lang === 'hi' ? 'नकली ऑफ़लाइन डेटा' : 'মক অফলাইন ডেটা'}</span>
+                  <Switch
+                    selected={settings.virtualDataMock || false}
+                    onSelectionChange={(checked) => update({ virtualDataMock: checked })}
+                    aria-label="Mock Offline Data"
+                  >
+                    {({ isSelected }) => (
+                      <Switch.Content>
+                        <Switch.Control className={`h-[24px] w-[44px] rounded-full transition-colors flex items-center ${isSelected ? 'bg-[var(--accent-color)] shadow-[0_0_12px_rgba(212,255,0,0.4)]' : 'bg-white/10'}`}>
+                          <Switch.Thumb className={`size-[18px] rounded-full bg-white transition-all ${isSelected ? 'translate-x-[22px]' : 'translate-x-[2px]'}`} />
+                        </Switch.Control>
+                      </Switch.Content>
+                    )}
+                  </Switch>
                 </label>
               </div>
             </div>
@@ -4090,16 +4129,23 @@ function Settings({ settings, setSettings, reloadWeather, weather }) {
             </div>
             <div>
               <label className="text-xs text-gray-400 block mb-1 font-bold">{t.oledMode}</label>
-              <div className="flex items-center mt-2">
-                <label className="relative inline-flex items-center cursor-pointer select-none">
-                  <input
-                    type="checkbox"
-                    checked={settings.isOled}
-                    onChange={(e) => update({ isOled: e.target.checked })}
-                    className="rounded border-white/10 text-[var(--accent-color)] bg-[#1c1e14] focus:ring-[var(--accent-color)]"
-                  />
-                  <span className="ml-2 text-xs font-bold text-white">{t.enableOled}</span>
-                </label>
+              <div className="flex items-center mt-1">
+                <Switch
+                  selected={settings.isOled}
+                  onSelectionChange={(checked) => update({ isOled: checked })}
+                  aria-label={t.enableOled}
+                >
+                  {({ isSelected }) => (
+                    <Switch.Content>
+                      <div className="flex items-center">
+                        <Switch.Control className={`h-[24px] w-[44px] rounded-full transition-colors flex items-center ${isSelected ? 'bg-[var(--accent-color)] shadow-[0_0_12px_rgba(212,255,0,0.4)]' : 'bg-white/10'}`}>
+                          <Switch.Thumb className={`size-[18px] rounded-full bg-white transition-all ${isSelected ? 'translate-x-[22px]' : 'translate-x-[2px]'}`} />
+                        </Switch.Control>
+                        <span className="ml-2 text-xs font-bold text-white">{t.enableOled}</span>
+                      </div>
+                    </Switch.Content>
+                  )}
+                </Switch>
               </div>
             </div>
           </div>
@@ -5350,26 +5396,34 @@ export default function App() {
         )}
       </main>
 
-      {/* NAVIGATION BAR — 5 tabs, use smaller w-10 icons */}
-      <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[94%] bg-[rgba(30,32,26,0.60)] backdrop-blur-xl border border-white/10 rounded-full h-16 flex items-center justify-around px-3 z-[100] shadow-2xl">
-        {[
-          { id: 'dashboard', icon: 'grid_view' },
-          { id: 'history',   icon: 'history' },
-          { id: 'tasks',     icon: 'checklist' },
-          { id: 'chat',      icon: 'forum' },
-          { id: 'ai',        icon: 'auto_awesome' },
-        ].map(({ id, icon }) => (
-          <button
-            key={id}
-            onClick={() => setTab(id)}
-            className={`w-10 h-10 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 ${
-              tab === id ? 'text-black shadow-lg' : 'text-gray-500 hover:text-gray-300'
-            }`}
-            style={tab === id ? { backgroundColor: 'var(--accent-color)', boxShadow: '0 0 14px color-mix(in srgb, var(--accent-color) 40%, transparent)' } : {}}
-          >
-            <span className="material-symbols-outlined text-xl">{icon}</span>
-          </button>
-        ))}
+      {/* NAVIGATION BAR — HeroUI Tabs implementation */}
+      <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[94%] bg-[rgba(30,32,26,0.60)] backdrop-blur-xl border border-white/10 rounded-full h-16 flex items-center justify-center px-1 z-[100] shadow-2xl overflow-hidden">
+        <Tabs
+          selectedKey={tab}
+          onSelectionChange={(key) => setTab(String(key))}
+          className="w-full h-full flex items-center justify-center"
+        >
+          <Tabs.ListContainer className="w-full h-full flex items-center justify-center">
+            <Tabs.List className="w-full flex justify-around items-center h-full bg-transparent p-0 gap-0 border-none outline-none">
+              {[
+                { id: 'dashboard', icon: 'grid_view' },
+                { id: 'history',   icon: 'history' },
+                { id: 'tasks',     icon: 'checklist' },
+                { id: 'chat',      icon: 'forum' },
+                { id: 'ai',        icon: 'auto_awesome' },
+              ].map(({ id, icon }) => (
+                <Tabs.Tab
+                  key={id}
+                  id={id}
+                  className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 relative data-[selected=true]:text-black text-gray-500 hover:text-gray-300 border-none outline-none cursor-pointer"
+                >
+                  <span className="material-symbols-outlined text-xl z-10">{icon}</span>
+                  <Tabs.Indicator className="absolute inset-0 rounded-full bg-[var(--accent-color)] shadow-[0_0_14px_rgba(212,255,0,0.4)]" />
+                </Tabs.Tab>
+              ))}
+            </Tabs.List>
+          </Tabs.ListContainer>
+        </Tabs>
       </nav>
 
       {/* Dynamic Legal Footer */}
