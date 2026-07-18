@@ -1,0 +1,17 @@
+{
+  "name": "PlantAI Smart Farm",
+  "short_name": "PlantAI",
+  "description": "Smart AI-powered crop telemetry and watering advisor.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#13140f",
+  "theme_color": "#13140f",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjODRjYzE2IiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIGQ9Ik0xMiAyMkMxMiAxNyAxMiAxMiAxMiAxMCIvPjxwYXRoIGQ9Ik0xMiAxNEM4IDE0IDUgMTEgNSA3QzggNyAxMSA5IDEyIDEyIi8+PHBhdGggZD0iTTEyIDEyQzEzIDkgMTYgNyAyMCA3QzIwIDExIDE3IDE0IDEyIDE0Ii8+PC9zdmc+",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

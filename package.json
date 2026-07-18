@@ -1,0 +1,31 @@
+{
+    "name": "plantify",
+    "private": true,
+    "version": "0.1.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite --host 0.0.0.0",
+        "build": "vite build",
+        "preview": "vite preview",
+        "test": "node node_modules/vitest/vitest.mjs run"
+    },
+    "dependencies": {
+        "@react-three/drei": "^9.122.0",
+        "@react-three/fiber": "^8.18.0",
+        "framer-motion": "^12.42.2",
+        "gsap": "^3.15.0",
+        "leaflet": "^1.9.4",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-is": "^19.2.7",
+        "react-leaflet": "^4.2.1",
+        "recharts": "^3.9.1",
+        "three": "^0.160.1"
+    },
+    "devDependencies": {
+        "@supabase/cli": "^1.0.0",
+        "@vitejs/plugin-react": "^4.2.0",
+        "vite": "^8.1.4",
+        "vitest": "^4.1.10"
+    }
+}
