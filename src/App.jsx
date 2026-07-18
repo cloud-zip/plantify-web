@@ -680,9 +680,17 @@ const weatherPlaces = {
 };
 
 const defaultSettings = {
-  provider: 'openrouter', apiKey: '', baseUrl: providers.openrouter.baseUrl, model: providers.openrouter.model,
+  // AI — Groq + Qwen pre-configured
+  provider: 'groq',
+  apiKey: import.meta.env.VITE_GROQ_API_KEY || '',
+  baseUrl: providers.groq.baseUrl,
+  model: 'qwen/qwen3-32b',
   mode: 'direct', depth: 'Balanced', careStyle: 'Normal', budget: 'Low-cost', glass: 42, sensorInterval: 30, maxWatering: 10, cooldown: 5,
-  supabaseUrl: getRuntimeSupabaseUrl(), supabaseAnonKey: localStorage.getItem('plantai_supabase_key') || import.meta.env.VITE_SUPABASE_ANON_KEY || '', plantType: 'millet', plantName: 'My favorite plant', city: 'Patna', country: 'India', latitude: 25.5941, longitude: 85.1376, weatherPlace: 'patna', fieldAreaSqM: 0.1, soilType: 'Standard Soil', useVirtualSoil: false, secretUnlocked: false, showKey: false, plantingDate: '2026-06-01',
+  // Supabase — pre-configured from build env
+  supabaseUrl: getRuntimeSupabaseUrl(),
+  supabaseAnonKey: import.meta.env.VITE_SUPABASE_ANON_KEY || '',
+  // Farm defaults
+  plantType: 'millet', plantName: 'My favorite plant', city: 'Patna', country: 'India', latitude: 25.5941, longitude: 85.1376, weatherPlace: 'patna', fieldAreaSqM: 0.1, soilType: 'Standard Soil', useVirtualSoil: false, secretUnlocked: false, showKey: false, plantingDate: '2026-06-01',
   historyAverageMinutes: 15, backgroundRotation: 0,
   // Appearance Customizations
   theme: 'dark', accent: 'lime', fontHeading: 'Nunito', fontBody: 'Nunito', googleFontsUrl: '', fontSizeHeading: 'normal', fontSizeBody: 'normal',
@@ -699,6 +707,8 @@ const defaultSettings = {
   // Advanced Features
   language: 'en', autoWateringEnabled: false, autoWateringMoistureThreshold: 30, autoWateringDurationMinutes: 10, isOled: false,
   mandiState: '', mandiMarket: '',
+  // Setup — always complete, no wizard needed
+  isSetupComplete: true,
   // Multi-Field Support
   fields: [
     { id: '1', name: 'Main Crop Field', plantType: 'millet', plantName: 'Pearl Millet', area: 0.1, soilType: 'Standard Soil' },
@@ -1164,7 +1174,7 @@ async function fetchJson(url, options = {}) {
     ...(options.headers || {})
   };
 
-  const sessionToken = localStorage.getItem('plantai_session_token') || '';
+  const sessionToken = localStorage.getItem('plantify_user_token') || '';
 
   if (anonKey) {
     headers['apikey'] = anonKey;
@@ -1183,7 +1193,7 @@ async function fetchJson(url, options = {}) {
   const json = await res.json().catch(() => ({}));
   if (!res.ok) {
     if (res.status === 401) {
-      localStorage.removeItem('plantai_session_token');
+      localStorage.removeItem('plantify_user_token');
       window.dispatchEvent(new CustomEvent('plantify-unauthorized'));
     }
     const err = new Error(json.error || `Request failed ${res.status}`);
@@ -3911,8 +3921,18 @@ function Settings({ settings, setSettings, reloadWeather, weather }) {
 
             {/* Log Out Button */}
             <button
-              onClick={() => {
-                localStorage.removeItem('plantai_session_token');
+              onClick={async () => {
+                const token = localStorage.getItem('plantify_user_token');
+                const url = (settings.supabaseUrl || import.meta.env.VITE_SUPABASE_URL || '').replace(/\/$/, '');
+                const key = settings.supabaseAnonKey || import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+                if (token && url) {
+                  await fetch(`${url}/auth/v1/logout`, {
+                    method: 'POST',
+                    headers: { 'apikey': key, 'Authorization': `Bearer ${token}` }
+                  }).catch(() => {});
+                }
+                localStorage.removeItem('plantify_user_token');
+                localStorage.removeItem('plantify_user_email');
                 window.location.reload();
               }}
               className="w-full py-3 border border-red-900/30 hover:bg-red-950/20 text-red-400 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5"
@@ -4381,138 +4401,135 @@ function Settings({ settings, setSettings, reloadWeather, weather }) {
 
 // ---------------- LOGIN SCREEN ----------------
 function LoginScreen({ settings, setSettings, onLoginSuccess }) {
-  const t = dict[settings?.language || 'en'] || dict.en;
-  const [deviceIdInput, setDeviceIdInput] = useState(() => {
-    const activeId = settings.activeFieldId || '1';
-    return `esp32-field-00${activeId}`;
-  });
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPass, setShowPass] = useState(false);
 
-  const updateSettingsLanguage = (lang) => {
-    const next = { ...settings, language: lang };
-    setSettings(next);
-    saveSettings(next);
-  };
+  const supabaseUrl = (settings.supabaseUrl || import.meta.env.VITE_SUPABASE_URL || '').replace(/\/$/, '');
+  const anonKey = settings.supabaseAnonKey || import.meta.env.VITE_SUPABASE_ANON_KEY || '';
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    if (!deviceIdInput.trim() || !password.trim()) {
-      setErrorMsg('Device name and password are required');
+    if (!email.trim() || !password.trim()) {
+      setErrorMsg('Email and password are required.');
       return;
     }
     setLoading(true);
     setErrorMsg('');
     try {
-      const supabaseUrl = settings.supabaseUrl || localStorage.getItem('plantai_supabase_url') || import.meta.env.VITE_SUPABASE_URL || '';
-      let formattedUrl = supabaseUrl.trim();
-      if (formattedUrl && !/^https?:\/\//i.test(formattedUrl)) {
-        formattedUrl = 'https://' + formattedUrl;
-      }
-      const url = `${formattedUrl.replace(/\/$/, '')}/functions/v1/device-login`;
-      
-      const res = await fetch(url, {
+      const res = await fetch(`${supabaseUrl}/auth/v1/token?grant_type=password`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': settings.supabaseAnonKey || localStorage.getItem('plantai_supabase_key') || import.meta.env.VITE_SUPABASE_ANON_KEY || ''
-        },
-        body: JSON.stringify({
-          device_id: deviceIdInput.trim(),
-          password: password.trim()
-        })
+        headers: { 'Content-Type': 'application/json', 'apikey': anonKey },
+        body: JSON.stringify({ email: email.trim(), password: password.trim() })
       });
-      
       const json = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        throw new Error(json.error || `Server returned ${res.status}`);
-      }
-      
-      if (json.token) {
-        localStorage.setItem('plantai_session_token', json.token);
-        onLoginSuccess();
-      } else {
-        throw new Error('No session token returned');
-      }
+      if (!res.ok) throw new Error(json.error_description || json.msg || 'Invalid email or password.');
+      localStorage.setItem('plantify_user_token', json.access_token);
+      localStorage.setItem('plantify_user_email', json.user?.email || email.trim());
+      onLoginSuccess();
     } catch (err) {
-      setErrorMsg(err.message || 'Login failed. Please verify credentials.');
+      setErrorMsg(err.message || 'Login failed.');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="max-w-md mx-auto min-h-screen flex items-center justify-center p-4">
-      <div className="w-full bg-[rgba(30,32,26,0.45)] backdrop-blur-xl rounded-[40px] p-8 border border-white/10 shadow-2xl space-y-6 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-32 h-32 blur-3xl rounded-full bg-[var(--accent-color)]/10"></div>
-        
-        {/* Header */}
-        <div className="text-center space-y-2 relative z-10">
-          <div className="w-14 h-14 mx-auto rounded-full flex items-center justify-center bg-white/5 border border-white/10 shadow-xl animate-toast-enter" style={{ color: 'var(--accent-color)' }}>
-            <span className="material-symbols-outlined text-3xl">lock</span>
+    <div className="min-h-screen flex items-center justify-center p-5">
+      <div className="w-full max-w-sm">
+
+        {/* Logo */}
+        <div className="text-center mb-10">
+          <div
+            className="w-20 h-20 mx-auto mb-4 rounded-3xl flex items-center justify-center shadow-2xl"
+            style={{ background: 'linear-gradient(135deg, var(--accent-color) 0%, #2d5a27 100%)' }}
+          >
+            <span className="material-symbols-outlined text-4xl text-black" style={{ fontVariationSettings: "'FILL' 1" }}>forest</span>
           </div>
-          <h2 className="serif-title text-3xl font-bold" style={{ color: 'var(--accent-color)' }}>{t.loginTitle}</h2>
-          <p className="text-xs text-gray-400">{t.loginSubtitle}</p>
-          
-          <div className="flex justify-center pt-2">
-            <select
-              value={settings.language || 'en'}
-              onChange={(e) => updateSettingsLanguage(e.target.value)}
-              className="bg-black/35 border border-white/10 rounded-full px-3 py-1 text-[11px] focus:ring-[var(--accent-color)] text-gray-300 appearance-none focus:outline-none cursor-pointer"
-            >
-              <option value="en" className="bg-[#13140f]">English</option>
-              <option value="hi" className="bg-[#13140f]">हिन्दी</option>
-              <option value="bn" className="bg-[#13140f]">বাংলা</option>
-            </select>
-          </div>
+          <h1 className="text-3xl font-black tracking-tight" style={{ color: 'var(--accent-color)' }}>Plantify</h1>
+          <p className="text-xs text-gray-500 mt-1 tracking-widest uppercase">Smart Farm Dashboard</p>
         </div>
 
-        {/* Error alert */}
-        {errorMsg && (
-          <div className="p-3.5 bg-red-950/40 border border-red-900/30 rounded-2xl flex items-start gap-2.5 text-xs text-red-300 leading-normal">
-            <span className="material-symbols-outlined text-sm text-red-400 mt-0.5">error</span>
-            <p className="flex-1">{errorMsg}</p>
+        {/* Card */}
+        <div className="bg-white/[0.04] border border-white/10 rounded-3xl p-7 shadow-2xl backdrop-blur-xl space-y-5">
+          <div>
+            <h2 className="text-lg font-bold text-white">Welcome back</h2>
+            <p className="text-xs text-gray-500 mt-0.5">Sign in to access your dashboard</p>
           </div>
-        )}
 
-        <form onSubmit={handleLogin} className="space-y-4">
-          <div>
-            <label className="text-xs text-gray-400 block mb-1 font-bold">{t.deviceId}</label>
-            <input
-              type="text"
-              value={deviceIdInput}
-              onChange={(e) => setDeviceIdInput(e.target.value)}
-              className="w-full bg-[#1c1e14] border border-white/10 rounded-xl px-4 py-3 text-sm focus:ring-[var(--accent-color)] text-white focus:outline-none"
-              placeholder={t.deviceIdPlaceholder}
+          {errorMsg && (
+            <div className="flex items-start gap-2.5 p-3 bg-red-950/50 border border-red-800/40 rounded-2xl text-xs text-red-300">
+              <span className="material-symbols-outlined text-sm text-red-400 shrink-0 mt-0.5">error</span>
+              {errorMsg}
+            </div>
+          )}
+
+          <form onSubmit={handleLogin} className="space-y-4">
+            {/* Email */}
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Email</label>
+              <div className="relative">
+                <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 text-[18px]">alternate_email</span>
+                <input
+                  id="login-email"
+                  type="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  disabled={loading}
+                  autoComplete="email"
+                  className="w-full bg-black/30 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[var(--accent-color)]/60 transition-colors"
+                />
+              </div>
+            </div>
+
+            {/* Password */}
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Password</label>
+              <div className="relative">
+                <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 text-[18px]">lock</span>
+                <input
+                  id="login-password"
+                  type={showPass ? 'text' : 'password'}
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  disabled={loading}
+                  autoComplete="current-password"
+                  className="w-full bg-black/30 border border-white/10 rounded-xl pl-10 pr-11 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[var(--accent-color)]/60 transition-colors"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPass(v => !v)}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
+                  tabIndex={-1}
+                >
+                  <span className="material-symbols-outlined text-[18px]">{showPass ? 'visibility_off' : 'visibility'}</span>
+                </button>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              id="login-submit"
               disabled={loading}
-            />
-          </div>
-          <div>
-            <label className="text-xs text-gray-400 block mb-1 font-bold">{t.password}</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-[#1c1e14] border border-white/10 rounded-xl px-4 py-3 text-sm focus:ring-[var(--accent-color)] text-white focus:outline-none"
-              placeholder="••••••••"
-              disabled={loading}
-            />
-          </div>
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-3.5 text-black font-bold rounded-xl text-sm cursor-pointer hover:opacity-90 transition-all flex items-center justify-center gap-2"
-            style={{ backgroundColor: 'var(--accent-color)', opacity: loading ? 0.6 : 1 }}
-          >
-            {loading ? (
-              <span className="animate-spin h-4 w-4 border-2 border-black border-t-transparent rounded-full"></span>
-            ) : (
-              <span className="material-symbols-outlined text-sm">login</span>
-            )}
-            {loading ? t.authenticating : t.signIn}
-          </button>
-        </form>
+              className="w-full py-3.5 rounded-xl font-bold text-sm text-black flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
+              style={{ backgroundColor: 'var(--accent-color)', opacity: loading ? 0.7 : 1 }}
+            >
+              {loading
+                ? <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                : <span className="material-symbols-outlined text-[18px]">login</span>
+              }
+              {loading ? 'Signing in…' : 'Sign In'}
+            </button>
+          </form>
+        </div>
+
+        <p className="text-center text-[11px] text-gray-600 mt-6">
+          © 2026 Plantify · Built by CLOUD 🌨️
+        </p>
       </div>
     </div>
   );
@@ -4783,7 +4800,7 @@ export default function App() {
   const [weather, setWeather] = useState(loadCachedWeatherData);
   const [isOnline, setIsOnline] = useState(typeof navigator !== 'undefined' ? navigator.onLine : true);
   const [settings, setSettings] = useState(loadSettings);
-  const [isLoggedIn, setIsLoggedIn] = useState(() => Boolean(localStorage.getItem('plantai_session_token')));
+  const [isLoggedIn, setIsLoggedIn] = useState(() => Boolean(localStorage.getItem('plantify_user_token')));
   const [showTerms, setShowTerms] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
   const DEVICE_ID = getActiveDeviceId();
@@ -4793,7 +4810,7 @@ export default function App() {
   useEffect(() => {
     const handleUnauthorized = () => {
       setIsLoggedIn(false);
-      localStorage.removeItem('plantai_session_token');
+      localStorage.removeItem('plantify_user_token');
     };
     window.addEventListener('plantify-unauthorized', handleUnauthorized);
     return () => {
@@ -5015,7 +5032,7 @@ export default function App() {
       setError(e.message);
       if (e.status === 401 || e.message.includes('401') || e.message.toLowerCase().includes('unauthorized') || e.message.toLowerCase().includes('jwt')) {
         setIsLoggedIn(false);
-        localStorage.removeItem('plantai_session_token');
+        localStorage.removeItem('plantify_user_token');
       }
     } finally {
       setRefreshing(false);
