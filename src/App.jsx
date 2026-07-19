@@ -1182,7 +1182,7 @@ async function fetchJson(url, options = {}) {
     headers['apikey'] = anonKey;
   }
 
-  if (sessionToken && sessionToken !== 'admin_demo_token') {
+  if (sessionToken && sessionToken !== 'admin_demo_token' && sessionToken !== 'admin_real_token') {
     headers['Authorization'] = `Bearer ${sessionToken}`;
   } else if (anonKey) {
     headers['Authorization'] = `Bearer ${anonKey}`;
@@ -4159,7 +4159,7 @@ function Settings({ settings, setSettings, reloadWeather, weather }) {
                       const token = localStorage.getItem('plantify_user_token');
                       const url = (settings.supabaseUrl || import.meta.env.VITE_SUPABASE_URL || '').replace(/\/$/, '');
                       const key = settings.supabaseAnonKey || import.meta.env.VITE_SUPABASE_ANON_KEY || '';
-                      if (token && url) {
+                      if (token && url && token !== 'admin_demo_token' && token !== 'admin_real_token') {
                         await fetch(`${url}/auth/v1/logout`, {
                           method: 'POST',
                           headers: { 'apikey': key, 'Authorization': `Bearer ${token}` }
@@ -4672,6 +4672,26 @@ function LoginScreen({ settings, setSettings, onLoginSuccess }) {
         // Auto-enable mock telemetry by default for demo ease
         const current = loadSettings();
         const nextSettings = { ...current, virtualDataMock: true };
+        saveSettings(nextSettings);
+        setSettings(nextSettings);
+        
+        onLoginSuccess();
+        return;
+      }
+
+      if (password.trim() === 'real') {
+        localStorage.setItem('plantify_user_token', 'admin_real_token');
+        localStorage.setItem('plantify_user_email', email.trim() || 'a@a.com');
+        
+        // Disable mock telemetry and enforce real configuration
+        const current = loadSettings();
+        const nextSettings = { 
+          ...current, 
+          virtualDataMock: false,
+          supabaseUrl: current.supabaseUrl || import.meta.env.VITE_SUPABASE_URL || '',
+          supabaseAnonKey: current.supabaseAnonKey || import.meta.env.VITE_SUPABASE_ANON_KEY || '',
+          apiKey: current.apiKey || import.meta.env.VITE_GROQ_API_KEY || ''
+        };
         saveSettings(nextSettings);
         setSettings(nextSettings);
         
