@@ -3681,6 +3681,7 @@ const providerModels = {
 
 function Settings({ settings, setSettings, reloadWeather, weather }) {
   const t = dict[settings?.language || 'en'] || dict.en;
+  const lang = settings?.language || 'en';
   
   const [test, setTest] = useState('');
   const [apiModels, setApiModels] = useState([]);
@@ -5496,7 +5497,7 @@ export default function App() {
           npk_n: 130,
           npk_p: 72,
           npk_k: 158,
-          relay_motor_on: relayOverride !== null ? relayOverride : false
+          relay_motor_on: false
         };
         const nextData = {
           latest: latestReading,
