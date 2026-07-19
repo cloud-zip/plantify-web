@@ -1,9 +1,76 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, createContext, useContext, Children } from 'react';
 import { XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 import Beams from './Beams';
 import PillNav from './PillNav';
 import LocationMap from './LocationMap';
-import { Switch, Tooltip, Tabs } from '@heroui/react';
+
+// Custom Switch component mimicking HeroUI/NextUI design parameters
+const Switch = ({ selected, onSelectionChange, children }) => {
+  const isSelected = !!selected;
+  return (
+    <button
+      onClick={() => onSelectionChange?.(!isSelected)}
+      className="focus:outline-none cursor-pointer"
+      type="button"
+    >
+      {typeof children === 'function' ? children({ isSelected }) : children}
+    </button>
+  );
+};
+Switch.Content = ({ children }) => children;
+Switch.Control = ({ className, children }) => <div className={className}>{children}</div>;
+Switch.Thumb = ({ className }) => <div className={className} />;
+
+// Custom CSS Tooltip component with hover disclosure triggers
+const Tooltip = ({ children }) => {
+  return (
+    <div className="relative inline-block group">
+      {children}
+    </div>
+  );
+};
+Tooltip.Trigger = ({ children, className }) => {
+  return <div className={className}>{children}</div>;
+};
+Tooltip.Content = ({ className, children }) => {
+  return (
+    <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-[9999] pointer-events-none ${className}`}>
+      {children}
+    </div>
+  );
+};
+
+// Custom Tabs component matching RAC/HeroUI compound design specs
+const TabsContext = createContext(null);
+const Tabs = ({ selectedKey, onSelectionChange, children, className }) => {
+  return (
+    <TabsContext.Provider value={{ selectedKey, onSelectionChange }}>
+      <div className={className}>{children}</div>
+    </TabsContext.Provider>
+  );
+};
+Tabs.ListContainer = ({ children, className }) => <div className={className}>{children}</div>;
+Tabs.List = ({ children, className }) => <div className={className}>{children}</div>;
+Tabs.Tab = ({ id, className, children }) => {
+  const ctx = useContext(TabsContext);
+  const isSelected = ctx?.selectedKey === id;
+  return (
+    <button
+      onClick={() => ctx?.onSelectionChange?.(id)}
+      data-selected={isSelected || undefined}
+      className={className}
+      type="button"
+    >
+      {Children.map(children, child => {
+        if (child?.type === Tabs.Indicator) {
+          return isSelected ? child : null;
+        }
+        return child;
+      })}
+    </button>
+  );
+};
+Tabs.Indicator = ({ className }) => <div className={className} />;
 
 
 const LZW = {
