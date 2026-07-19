@@ -37,6 +37,7 @@ const PillNav = ({
         const pill = circle.parentElement;
         const rect = pill.getBoundingClientRect();
         const { width: w, height: h } = rect;
+        if (!h || !w) return;
         const R = ((w * w) / 4 + h * h) / (2 * h);
         const D = Math.ceil(2 * R) + 2;
         const delta = Math.ceil(R - Math.sqrt(Math.max(0, R * R - (w * w) / 4))) + 1;

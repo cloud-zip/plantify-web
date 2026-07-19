@@ -97,7 +97,7 @@ const dict = {
     dashboard: "Dashboard", history: "Sensor History", ai: "AI Plan", settings: "Settings", tasks: "Tasks", advisor: "Advisor",
     waterMotor: "Water Motor", nutrients: "Nutrient Levels", healthScore: "Overall Health Score",
     autoWatering: "Auto-Watering", offline: "Offline Mode", analysis: "Run Analysis",
-    welcome: "🌱 Welcome to Plantify", printPlan: "Print/Save PDF Plan", aiReasoning: "AI Reasoning",
+    welcome: "Welcome to Plantify", printPlan: "Print/Save PDF Plan", aiReasoning: "AI Reasoning",
     weather: "Weather", directControl: "Direct Control", status: "Status",
     aiPlanTitle: "AI Care Plan", aiPlanDesc: "Generates crop schedule using real ESP32 sensors and current weather.",
     generateBtn: "Generate 7-Day Care Chart", analysisDepth: "Analysis Depth", opStyle: "Operational Style",
@@ -105,15 +105,15 @@ const dict = {
     chatPlaceholder: "Ask anything about your crop...", send: "Send", newSession: "New",
     weatherRisk: "Weather Risk", wateringTarget: "Watering Target",
     carePlan7Day: "7-Day Care Plan", day: "Day", task: "Task", category: "Category", priority: "Priority",
-    fertilizerRec: "Fertilizer Recommendation", plantProfile: "Field Profile", targetYield: "Target Yield",
-    systemConfig: "System & History", apiIntegration: "API Integration", visualStyling: "Visual & Styling Config",
+    fertilizerRec: "Fertilizer Recommendation", plantProfile: "Crop & Field Profile", targetYield: "Target Yield",
+    systemConfig: "System & Account", apiIntegration: "API Integration", visualStyling: "Visual & Styling Config",
     autoWateringSettings: "Auto-Watering Settings", saveFieldSettings: "Save Settings", appSettings: "App Settings",
     activeFieldConfig: "Active Field Config", testConnection: "Test Connection", clearKey: "Clear Key",
     language: "Language (Local)", oledMode: "OLED True Black", enableOled: "Enable OLED Mode",
     accentColor: "Accent Color", aiProvider: "AI Provider", model: "Model",
     sysPlan: "System Instructions (Plan)", sysChat: "System Instructions (Chat)",
     soilMoisture: "Soil Moisture", temperature: "Temperature", humidity: "Humidity",
-    menuAppearance: "Appearance & Theme", menuAIConfig: "AI Configuration", menuLocation: "Weather & Location",
+    menuAppearance: "Theme & Customization", menuAIConfig: "AI & API Configuration", menuLocation: "Location & Weather Settings",
     descField: "Crop type, planting date, acreage, soil types",
     descAppearance: "Modify theme styles (Light/Dark), color accents, fonts, beams",
     descSystem: "Log intervals, DB table logs, charts curve, and background rotation",
@@ -209,7 +209,7 @@ const dict = {
     dashboard: "डैशबोर्ड", history: "सेंसर इतिहास", ai: "एआई योजना", settings: "सेटिंग्स", tasks: "कार्य", advisor: "सलाहकार",
     waterMotor: "पानी की मोटर", nutrients: "पोषक तत्व स्तर", healthScore: "कुल स्वास्थ्य",
     autoWatering: "स्वचालित सिंचाई", offline: "ऑफ़लाइन मोड", analysis: "विश्लेषण करें",
-    welcome: "🌱 Welcome to Plantify", printPlan: "पीडीएफ योजना प्रिंट/सेव करें", aiReasoning: "एআই का तर्क",
+    welcome: "Welcome to Plantify", printPlan: "पीडीएफ योजना प्रिंट/सेव करें", aiReasoning: "एআই का तर्क",
     weather: "मौसम", directControl: "प्रत्यक्ष नियंत्रण", status: "स्थिति",
     aiPlanTitle: "एआई केयर प्लान", aiPlanDesc: "वास्तविक सेंसर और मौसम का उपयोग करके फसल कार्यक्रम बनाता है।",
     generateBtn: "7-दिवसीय देखभाल चार्ट बनाएं", analysisDepth: "विश्लेषण की गहराई", opStyle: "परिचालन शैली",
@@ -217,15 +217,15 @@ const dict = {
     chatPlaceholder: "अपनी फसल के बारे में कुछ भी पूछें...", send: "भेजें", newSession: "नया",
     weatherRisk: "मौसम जोखिम", wateringTarget: "सिंचाई लक्ष्य",
     carePlan7Day: "7-दिवसीय देखभाल योजना", day: "दिन", task: "कार्य", category: "श्रेणी", priority: "प्राथमिकता",
-    fertilizerRec: "उर्वरक अनुशंसा", plantProfile: "फ़ील्ड प्रोफ़ाइल", targetYield: "लक्ष्य उपज",
-    systemConfig: "सिस्टम और इतिहास", apiIntegration: "API एकीकरण", visualStyling: "दृश्य और शैली कॉन्फ़िग",
+    fertilizerRec: "उर्वरक अनुशंसा", plantProfile: "फसल और खेत प्रोफाइल", targetYield: "लक्ष्य उपज",
+    systemConfig: "सिस्टम और खाता", apiIntegration: "API एकीकरण", visualStyling: "दृश्य और शैली कॉन्फ़िग",
     autoWateringSettings: "स्वचालित सिंचाई सेटिंग्स", saveFieldSettings: "सेटिंग्स सहेजें", appSettings: "ऐप सेटिंग्स",
     activeFieldConfig: "सक्रिय फ़ील्ड कॉन्फ़िग", testConnection: "कनेक्शन का परीक्षण करें", clearKey: "कुंजी साफ़ करें",
     language: "भाषा (स्थानीय)", oledMode: "OLED ट्रू ब्लैक", enableOled: "OLED मोड सक्षम करें",
     accentColor: "मुख्य रंग (Accent)", aiProvider: "एआई प्रदाता", model: "मॉडल",
     sysPlan: "सिस्टम निर्देश (योजना)", sysChat: "सिस्टम निर्देश (चैट)",
     soilMoisture: "मिट्टी की नमी", temperature: "तापमान", humidity: "आर्द्रता",
-    menuAppearance: "रूप और थीम", menuAIConfig: "एआई कॉन्फ़िगरेशन", menuLocation: "मौसम और स्थान",
+    menuAppearance: "थीम और अनुकूलन", menuAIConfig: "एआई और एपीআই कॉन्फ़िगरेशन", menuLocation: "स्थान और मौसम सेटिंग्स",
     descField: "फसल का प्रकार, रोपण तिथि, क्षेत्रफल, मिट्टी के प्रकार",
     descAppearance: "थीम शैलियों, रंगों, फोंट और बीम को संशोधित करें",
     descSystem: "लॉग अंतराल, डीबी टेबल लॉग, चार्ट वक्र और पृष्ठभूमि रोटेशन",
@@ -321,7 +321,7 @@ const dict = {
     dashboard: "ড্যাশবোর্ড", history: "সেন্সর ইতিহাস", ai: "এআই পরিকল্পনা", settings: "সেটিংস", tasks: "কাজ", advisor: "উপদেষ্টা",
     waterMotor: "জলের মোটর", nutrients: "পুষ্টির স্তর", healthScore: "সামগ্রিক স্বাস্থ্য",
     autoWatering: "স্বয়ংক্রিয় জল", offline: "অফলাইন মোড", analysis: "বিশ্লেষণ করুন",
-    welcome: "🌱 Welcome to Plantify", printPlan: "পিডিএফ প্ল্যান প্রিন্ট/সেভ করুন", aiReasoning: "এআই-এর যুক্তি",
+    welcome: "Welcome to Plantify", printPlan: "পিডিএফ প্ল্যান প্রিন্ট/সেভ করুন", aiReasoning: "এআই-এর যুক্তি",
     weather: "আবহাওয়া", directControl: "সরাসরি নিয়ন্ত্রণ", status: "অবস্থা",
     aiPlanTitle: "এআই কেয়ার প্ল্যান", aiPlanDesc: "রিয়েল সেন্সর এবং বর্তমান আবহাওয়া ব্যবহার করে ফসলের সময়সূচী তৈরি করে।",
     generateBtn: "৭ দিনের কেয়ার চার্ট তৈরি করুন", analysisDepth: "বিশ্লেষণের গভীরতা", opStyle: "অপারেশনাল স্টাইল",
@@ -329,15 +329,15 @@ const dict = {
     chatPlaceholder: "আপনার ফসল সম্পর্কে কিছু জিজ্ঞাসা করুন...", send: "পাঠান", newSession: "নতুন",
     weatherRisk: "আবহাওয়ার ঝুঁকি", wateringTarget: "জলের লক্ষ্য",
     carePlan7Day: "৭ দিনের কেয়ার প্ল্যান", day: "দিন", task: "কাজ", category: "বিভাগ", priority: "অগ্রাধিকার",
-    fertilizerRec: "সারের সুপারিশ", plantProfile: "ক্ষেত্র প্রোফাইল", targetYield: "লক্ষ্য ফলন",
-    systemConfig: "সিস্টেম এবং ইতিহাস", apiIntegration: "API ইন্টিগ্রেশন", visualStyling: "ভিজ্যুয়াল এবং স্টাইলিং কনফিগারেশন",
+    fertilizerRec: "সারের সুপারিশ", plantProfile: "ফসল ও ক্ষেত্র প্রোফাইল", targetYield: "লক্ষ্য ফলন",
+    systemConfig: "সিস্টেম ও অ্যাকাউন্ট", apiIntegration: "API ইন্টিগ্রেশন", visualStyling: "ভিজ্যুয়াল এবং স্টাইলিং কনফিগারেশন",
     autoWateringSettings: "স্বয়ংক্রিয় জলের সেটিংস", saveFieldSettings: "সেটিংস সংরক্ষণ করুন", appSettings: "অ্যাপ সেটিংস",
     activeFieldConfig: "সক্রিয় ক্ষেত্র কনফিগারেশন", testConnection: "সংযোগ পরীক্ষা করুন", clearKey: "কী মুছুন",
     language: "ভাষা (স্থানীয়)", oledMode: "OLED ট্রু ব্ল্যাক", enableOled: "OLED মোড সক্ষম করুন",
     accentColor: "অ্যাকসেন্ট কালার", aiProvider: "এআই প্রদানকারী", model: "মডেল",
     sysPlan: "সিস্টেম নির্দেশাবলী (পরিকল্পনা)", sysChat: "সিস্টেম নির্দেশাবলী (চ্যাট)",
     soilMoisture: "মাটির আর্দ্রতা", temperature: "উষ্ণতা", humidity: "আর্দ্রতা",
-    menuAppearance: "চেহারা এবং থিম", menuAIConfig: "এআই কনফিগারেশন", menuLocation: "আবহাওয়া এবং অবস্থান",
+    menuAppearance: "থিম ও কাস্টমাইজেশন", menuAIConfig: "এআই ও এপিআই কনফিগারেশন", menuLocation: "স্থান ও আবহাওয়া সেটিংস",
     descField: "ফসলের ধরন, রোপণের তারিখ, আয়তন, মাটির ধরন",
     descAppearance: "থিম শৈলী, রং, ফন্ট এবং বিম পরিবর্তন করুন",
     descSystem: "লগ বিরতি, ডিবি টেবিল লগ, চার্ট বক্ররেখা এবং ব্যাকগ্রাউন্ড রোটেশন",
@@ -1638,7 +1638,7 @@ function PlantSwitcherPill({ settings, setSettings }) {
   }
 
   const profile = plantProfiles[settings.plantType];
-  const emojis = { rice:'🌾', wheat:'🌿', millet:'🌱', tomato:'🍅', chili:'🌶️', brinjal:'🍆', cucumber:'🥒', carrot:'🥕', spinach:'🥬', potato:'🥔', onion:'🧅', capsicum:'🫑', lettuce:'🥗', broccoli:'🥦', custom:'🌿' };
+  // crop icons use Material Symbols (potted_plant)
 
   return (
     <>
@@ -1652,7 +1652,7 @@ function PlantSwitcherPill({ settings, setSettings }) {
           maxWidth: 130, overflow: 'hidden',
         }}
       >
-        <span style={{ fontSize: 15, flexShrink: 0 }}>{emojis[settings.plantType] || '🌱'}</span>
+        <span className="material-symbols-outlined flex-shrink-0" style={{fontSize:16,color:'var(--accent-color)'}}>potted_plant</span>
         <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
           {settings.plantName || profile?.label || 'Select Crop'}
         </span>
@@ -1684,7 +1684,7 @@ function PlantSwitcherPill({ settings, setSettings }) {
                   cursor: 'pointer', textAlign: 'left',
                 }}
               >
-                <span style={{ fontSize: 22, flexShrink: 0 }}>{emojis[key] || '🌿'}</span>
+                <span className="material-symbols-outlined flex-shrink-0" style={{fontSize:22,color:'var(--accent-color)'}}>potted_plant</span>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: 13.5, fontWeight: 600, color: settings.plantType === key ? 'var(--accent-color)' : '#dde0c8' }}>{p.label}</div>
                   <div style={{ fontSize: 11, color: '#6b7a55', marginTop: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.ideal.slice(0, 52)}…</div>
@@ -1890,18 +1890,18 @@ function MarketTracker({ settings }) {
       <div className="bg-black/20 p-4 rounded-2xl border border-white/5 space-y-3">
         {loading ? (
           <div className="text-xs text-[var(--accent-color)] font-mono animate-pulse py-2 flex items-center gap-2">
-            <span className="animate-spin text-base">🔄</span>
+            <span className="material-symbols-outlined animate-spin" style={{fontSize:18}}>refresh</span>
             {lang === 'en' ? 'Fetching live prices securely...' : lang === 'hi' ? 'सुरक्षित रूप से लाइव दरें प्राप्त की जा रही हैं...' : 'নিরাপদভাবে লাইভ দর আনা হচ্ছে...'}
           </div>
         ) : error ? (
           <div className="text-xs text-red-400 font-mono py-2 space-y-1">
-            <div className="font-bold flex items-center gap-1">⚠️ {lang === 'en' ? 'Live Price Error:' : lang === 'hi' ? 'लाइव मूल्य त्रुटि:' : 'লাইভ মূল্য ত্রুটি:'}</div>
+            <div className="font-bold flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">warning</span> {lang === 'en' ? 'Live Price Error:' : lang === 'hi' ? 'लाइव मूल्य त्रुटि:' : 'লাইভ মূল্য ত্রুটি:'}</div>
             <p className="text-[11px] text-gray-400 leading-normal">{error}</p>
           </div>
         ) : liveData ? (
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-xl">🌾</div>
+              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center"><span className="material-symbols-outlined" style={{fontSize:20,color:'var(--accent-color)'}}>agriculture</span></div>
               <div>
                 <div className="font-bold">{crop}</div>
                 <div className="text-[10px] text-gray-400 font-mono">
@@ -2941,7 +2941,7 @@ function AiPlan({ data, weather, settings, aggregatedReadings }) {
           {plan.thinking_reasoning && (
             <div className="bg-[rgba(30,32,26,0.45)] backdrop-blur-xl rounded-[40px] p-6 border border-white/10 shadow-2xl">
               <h3 className="font-serif text-xl text-gray-400 mb-2 flex items-center gap-2">
-                <span className="text-[var(--accent-color)] text-lg">💡</span> {t.aiReasoning}
+                <span className="material-symbols-outlined" style={{fontSize:18,color:'var(--accent-color)'}}>psychology</span> {t.aiReasoning}
               </h3>
               <p className="text-xs text-gray-500 leading-relaxed italic whitespace-pre-wrap">{plan.thinking_reasoning}</p>
             </div>
@@ -3042,10 +3042,10 @@ function AiPlan({ data, weather, settings, aggregatedReadings }) {
 }
 
 const CHAT_QUICK_PROMPTS = [
-  '💧 When should I water?',
-  '🌡️ Is my temperature OK?',
-  '🧪 Explain my NPK',
-  '🐛 Check for pest risk',
+  'When should I water?',
+  'Is my temperature OK?',
+  'Explain my NPK readings',
+  'Check for pest risk',
 ];
 
 function fmtChatTime(ts) {
@@ -3066,7 +3066,7 @@ function Chat({ data, weather, settings, aggregatedReadings }) {
   const plantLabel = plantProfiles[plantType]?.label || 'your plant';
 
   function makeWelcome() {
-    return [{ role: 'assistant', text: `Hello! I'm **Plantify**, your advisor for **${plantLabel}** 🌿\n\nSend a message or upload a plant photo and I'll help diagnose issues, recommend care actions, and explain your sensor readings.`, ts: Date.now() }];
+    return [{ role: 'assistant', text: `Hello! I'm **Plantify**, your advisor for **${plantLabel}**.\n\nSend a message or upload a plant photo and I'll help diagnose issues, recommend care actions, and explain your sensor readings.`, ts: Date.now() }];
   }
 
   // Load chat sessions from local storage
@@ -3127,9 +3127,15 @@ function Chat({ data, weather, settings, aggregatedReadings }) {
   const bottomRef = useRef(null);
   const textRef   = useRef(null);
 
-  // Auto-scroll
+  const prevMsgCountRef = useRef(messages.length);
+
+  // Auto-scroll ONLY when a new message is added — NOT on tab switch / mount
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const curr = messages.length;
+    if (curr > prevMsgCountRef.current || loading) {
+      bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+    prevMsgCountRef.current = curr;
   }, [messages, loading]);
 
   const createNewSession = () => {
@@ -3204,7 +3210,7 @@ function Chat({ data, weather, settings, aggregatedReadings }) {
         : `${text}\nContext JSON: ${JSON.stringify(ctx)}`;
         
       const langStr = settings.language === 'hi' ? 'Hindi (हिन्दी)' : settings.language === 'bn' ? 'Bengali (বাংলা)' : 'English';
-      const formatInstruction = `\n\nCRITICAL: Respond strictly in ${langStr}. ALWAYS start your response with a clearly formatted reasoning block like this:\n\n💡 **Thinking:**\n[Your step-by-step logic here]\n\n---\n\n[Your final beautifully formatted ${langStr} answer here using bolding, bullet points, and headers as appropriate.]`;
+      const formatInstruction = `\n\nCRITICAL: Respond strictly in ${langStr}. ALWAYS start your response with a clearly formatted reasoning block like this:\n\n**Thinking:**\n[Your step-by-step logic here]\n\n---\n\n[Your final beautifully formatted ${langStr} answer here using bolding, bullet points, and headers as appropriate.]`;
       
       const mappedHistory = messages.map(m => ({
         role: m.role === 'assistant' ? 'assistant' : 'user',
@@ -3230,7 +3236,7 @@ function Chat({ data, weather, settings, aggregatedReadings }) {
         return s;
       }));
     } catch (e) {
-      const errorMsg = { role: 'assistant', text: `⚠️ ${e.message}`, ts: Date.now(), isError: true };
+      const errorMsg = { role: 'assistant', text: `Error: ${e.message}`, ts: Date.now(), isError: true };
       updateActiveSessionMessages([...nextMsgs, errorMsg]);
     } finally { 
       setLoading(false); 
@@ -3241,37 +3247,44 @@ function Chat({ data, weather, settings, aggregatedReadings }) {
     <div className="bg-[rgba(30,32,26,0.45)] backdrop-blur-xl rounded-[40px] border border-white/10 shadow-2xl flex flex-col overflow-hidden" style={{ minHeight: 520 }}>
 
       {/* Multi-Session Header */}
-      <div className="flex items-center justify-between px-6 pt-4 pb-3 border-b border-white/5 bg-white/5" style={{ flexShrink: 0 }}>
-        <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-[var(--accent-color)] text-sm">chat_bubble</span>
-          <select 
-            value={activeSessionId}
-            onChange={(e) => setActiveSessionId(e.target.value)}
-            className="bg-transparent text-xs text-white border-none focus:ring-0 font-bold max-w-[170px] truncate select-none focus:outline-none cursor-pointer"
-          >
-            {sessions.map(s => (
-              <option key={s.id} value={s.id} className="bg-[#1b1c17] text-white">
-                {s.title}
-              </option>
-            ))}
-          </select>
+      <div className="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5 bg-white/5" style={{ flexShrink: 0 }}>
+        <div className="flex items-center gap-2 min-w-0 flex-1">
+          <span className="material-symbols-outlined text-[var(--accent-color)] flex-shrink-0" style={{fontSize:16}}>chat_bubble</span>
+          <div className="relative flex items-center bg-white/5 border border-white/10 rounded-xl px-2.5 py-1.5 focus-within:border-[var(--accent-color)]/40 transition-all max-w-[195px] min-w-[140px] cursor-pointer">
+            <select
+              value={activeSessionId}
+              onChange={(e) => setActiveSessionId(e.target.value)}
+              className="bg-transparent text-xs text-white border-none focus:ring-0 font-bold pr-5 select-none focus:outline-none cursor-pointer w-full appearance-none"
+              style={{ WebkitAppearance: 'none', MozAppearance: 'none' }}
+            >
+              {sessions.map(s => (
+                <option key={s.id} value={s.id} className="bg-[#1c1e14] text-white">
+                  {s.title}
+                </option>
+              ))}
+            </select>
+            <span className="material-symbols-outlined absolute right-2 pointer-events-none text-gray-400" style={{fontSize:14}}>expand_more</span>
+          </div>
+
+          {sessions.length > 1 && (
+            <button
+              type="button"
+              onClick={() => deleteSession(activeSessionId)}
+              className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center border border-white/10 text-red-400/80 hover:text-red-400 hover:border-red-500/30 cursor-pointer transition-all active:scale-95 ml-1"
+              title="Delete Current Session"
+            >
+              <span className="material-symbols-outlined" style={{fontSize:15}}>delete</span>
+            </button>
+          )}
         </div>
-        <div className="flex items-center gap-2">
-          <button 
-            onClick={createNewSession}
-            className="p-1.5 rounded-lg bg-white/5 border border-white/10 text-[var(--accent-color)] text-xs font-bold flex items-center gap-1 hover:bg-white/10 transition-all cursor-pointer select-none"
-          >
-            <span className="material-symbols-outlined text-sm font-bold">add</span>
-            <span>{t.newSession}</span>
-          </button>
-          <button 
-            onClick={() => deleteSession(activeSessionId)}
-            className="p-1.5 rounded-lg bg-white/5 border border-white/10 text-red-400 hover:bg-red-950/20 hover:text-red-300 transition-all cursor-pointer"
-            title="Delete Session"
-          >
-            <span className="material-symbols-outlined text-sm">delete</span>
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={createNewSession}
+          className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center border border-white/10 text-gray-400 hover:text-white hover:border-[var(--accent-color)]/40 cursor-pointer transition-all active:scale-95 ml-2"
+          title="New Session"
+        >
+          <span className="material-symbols-outlined" style={{fontSize:16}}>add</span>
+        </button>
       </div>
 
       {/* Advisor Header Status */}
@@ -3910,17 +3923,15 @@ function Settings({ settings, setSettings, reloadWeather, weather }) {
 
       {activeMenu === 'system' && (
         <div className="space-y-4">
-          <div>
-            <h4 className="text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider">{t.systemAdvancedTitle}</h4>
-            <p className="text-[10px] text-gray-500 mb-4 leading-normal">{t.systemAdvancedDesc}</p>
-          </div>
-
           <div className="space-y-4">
-            {/* Auto Watering Section */}
-            <div className="p-4 bg-white/5 border border-white/10 rounded-2xl mb-4 space-y-3">
-              <label className="text-xs text-gray-400 block mb-1 font-bold">{t.autoWateringTitle}</label>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs text-white">{t.enableAutoWatering}</span>
+            {/* SECTION 1: AUTO WATERING CONTROL */}
+            <div className="p-4 bg-white/5 border border-white/10 rounded-2xl space-y-3">
+              <h4 className="text-xs font-bold text-white flex items-center gap-1.5 border-b border-white/5 pb-2">
+                <span className="material-symbols-outlined text-sm" style={{ color: 'var(--accent-color)' }}>water_drop</span>
+                {t.autoWateringTitle}
+              </h4>
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-xs text-gray-300">{t.enableAutoWatering}</span>
                 <Switch
                   selected={settings.autoWateringEnabled}
                   onSelectionChange={(checked) => update({ autoWateringEnabled: checked })}
@@ -3955,199 +3966,217 @@ function Settings({ settings, setSettings, reloadWeather, weather }) {
               </div>
             </div>
 
-            <div>
-              <label className="text-xs text-gray-400 block mb-1 font-bold">{t.supabaseUrl}</label>
-              <input
-                type="text"
-                value={settings.supabaseUrl || ''}
-                onChange={(e) => update({ supabaseUrl: e.target.value })}
-                className="w-full bg-[#1c1e14] border border-white/10 rounded-xl px-4 py-3 text-sm focus:ring-[var(--accent-color)] text-gray-300 focus:outline-none"
-                placeholder="https://yourproj.supabase.co"
-              />
-            </div>
-
-            <div>
-              <label className="text-xs text-gray-400 block mb-1 font-bold">{t.supabaseAnonKey}</label>
-              <input
-                type="password"
-                value={settings.supabaseAnonKey || ''}
-                onChange={(e) => {
-                  update({ supabaseAnonKey: e.target.value });
-                  localStorage.setItem('plantai_supabase_key', e.target.value);
-                }}
-                className="w-full bg-[#1c1e14] border border-white/10 rounded-xl px-4 py-3 text-sm focus:ring-[var(--accent-color)] text-gray-300 focus:outline-none"
-                placeholder={lang === 'en' ? 'Can be added later' : lang === 'hi' ? 'बाद में जोड़ा जा सकता है' : 'পরে যোগ করা যাবে'}
-              />
-              <button
-                onClick={() => {
-                  localStorage.setItem('plantai_supabase_url', settings.supabaseUrl || '');
-                  localStorage.setItem('plantai_supabase_key', settings.supabaseAnonKey || '');
-                  window.location.reload();
-                }}
-                className="mt-2 text-xs px-4 py-1.5 rounded-full font-bold cursor-pointer hover:scale-105 transition-all bg-[var(--accent-color)] text-black"
-              >
-                {lang === 'en' ? 'Apply & Reload Page' : lang === 'hi' ? 'लागू करें और पृष्ठ रीलोड करें' : 'প্রয়োগ করুন এবং পৃষ্ঠা পুনরায় লোড করুন'}
-              </button>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="text-xs text-gray-400 block mb-1 font-bold">{t.logIntervalLabel}</label>
-                <input
-                  type="number"
-                  value={settings.sensorInterval || 30}
-                  onChange={(e) => update({ sensorInterval: Number(e.target.value) })}
-                  className="w-full bg-[#1c1e14] border border-white/10 rounded-xl px-4 py-3 text-sm focus:ring-[var(--accent-color)] text-gray-300 focus:outline-none"
-                />
-              </div>
-              <div>
-                <label className="text-xs text-gray-400 block mb-1 font-bold">{t.averageMinutesLabel}</label>
-                <select
-                  value={settings.historyAverageMinutes || 15}
-                  onChange={(e) => update({ historyAverageMinutes: Number(e.target.value) })}
-                  className="w-full bg-[#1c1e14] border border-white/10 rounded-xl px-4 py-3 text-sm focus:ring-[var(--accent-color)] text-white appearance-none focus:outline-none"
-                >
-                  <option value={1} className="bg-[#13140f]">{lang === 'en' ? 'No Averaging (Raw 1m)' : lang === 'hi' ? 'कोई औसत नहीं (Raw 1m)' : 'কোন গড় নেই (Raw 1m)'}</option>
-                  <option value={5} className="bg-[#13140f]">{lang === 'en' ? '5 Minutes Average' : lang === 'hi' ? '५ मिनट औसत' : '৫ মিনিট গড়'}</option>
-                  <option value={15} className="bg-[#13140f]">{lang === 'en' ? '15 Minutes Average' : lang === 'hi' ? '१५ मिनट औसत' : '১৫ মিনিট গড়'}</option>
-                  <option value={30} className="bg-[#13140f]">{lang === 'en' ? '30 Minutes Average' : lang === 'hi' ? '३० मिनट औसत' : '৩০ মিনিট গড়'}</option>
-                  <option value={60} className="bg-[#13140f]">{lang === 'en' ? '1 Hour Average' : lang === 'hi' ? '१ घंटा औसत' : '১ ঘণ্টা গড়'}</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="text-xs text-gray-400 block mb-1 font-bold">{lang === 'en' ? 'Chart Curve Style' : lang === 'hi' ? 'चार्ट वक्र शैली' : 'চার্ট কার্ভ স্টাইল'}</label>
-                <select
-                  value={settings.chartCurve || 'smooth'}
-                  onChange={(e) => update({ chartCurve: e.target.value })}
-                  className="w-full bg-[#1c1e14] border border-white/10 rounded-xl px-4 py-3 text-sm focus:ring-[var(--accent-color)] text-white appearance-none focus:outline-none"
-                >
-                  <option value="smooth" className="bg-[#13140f]">{lang === 'en' ? 'Smooth Spline' : lang === 'hi' ? 'चिकना स्प्लाइन' : 'মসৃণ স্প্লাইন'}</option>
-                  <option value="straight" className="bg-[#13140f]">{lang === 'en' ? 'Straight Lines' : lang === 'hi' ? 'सीधी रेखाएं' : 'সোজা লাইন'}</option>
-                  <option value="stepped" className="bg-[#13140f]">{lang === 'en' ? 'Stepped Blocks' : lang === 'hi' ? 'सीढ़ीदार ब्लॉक' : 'ধাপে ধাপে ব্লক'}</option>
-                </select>
-              </div>
-              <div className="flex flex-col justify-end pb-2">
-                <label className="text-xs text-gray-400 mb-2 font-bold flex items-center justify-between cursor-pointer select-none w-full">
-                  <span>{lang === 'en' ? 'Mock Offline Data' : lang === 'hi' ? 'नकली ऑफ़लाइन डेटा' : 'মক অফলাইন ডেটা'}</span>
-                  <Switch
-                    selected={settings.virtualDataMock || false}
-                    onSelectionChange={(checked) => update({ virtualDataMock: checked })}
-                    aria-label="Mock Offline Data"
-                  >
-                    {({ isSelected }) => (
-                      <Switch.Content>
-                        <Switch.Control className={`h-[24px] w-[44px] rounded-full transition-colors flex items-center ${isSelected ? 'bg-[var(--accent-color)] shadow-[0_0_12px_rgba(212,255,0,0.4)]' : 'bg-white/10'}`}>
-                          <Switch.Thumb className={`size-[18px] rounded-full bg-white transition-all ${isSelected ? 'translate-x-[22px]' : 'translate-x-[2px]'}`} />
-                        </Switch.Control>
-                      </Switch.Content>
-                    )}
-                  </Switch>
-                </label>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3 pt-1 border-t border-white/5">
-              <div>
-                <label className="text-[10px] text-gray-400 block mb-1 font-bold">{t.sensorsTableLabel}</label>
-                <input
-                  type="text"
-                  value={settings.dbSensorsTable || 'sensor_readings'}
-                  onChange={(e) => update({ dbSensorsTable: e.target.value })}
-                  className="w-full bg-[#1c1e14] border border-white/10 rounded-xl px-3 py-2 text-xs focus:ring-[var(--accent-color)] text-gray-300 focus:outline-none"
-                />
-              </div>
-              <div>
-                <label className="text-[10px] text-gray-400 block mb-1 font-bold">{t.settingsTableLabel}</label>
-                <input
-                  type="text"
-                  value={settings.dbSettingsTable || 'system_settings'}
-                  onChange={(e) => update({ dbSettingsTable: e.target.value })}
-                  className="w-full bg-[#1c1e14] border border-white/10 rounded-xl px-3 py-2 text-xs focus:ring-[var(--accent-color)] text-gray-300 focus:outline-none"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="text-xs text-gray-400 block mb-1 font-bold">{lang === 'en' ? 'Background Animation Rotation' : lang === 'hi' ? 'पृष्ठभूमि रोटेशन (डिग्री)' : 'পটভূমি ঘূর্ণন (ডিগ্রী)'}</label>
-              <div className="flex items-center gap-3 bg-[#1c1e14] border border-white/10 rounded-xl px-4 py-3">
-                <input
-                  type="range"
-                  min="0"
-                  max="360"
-                  value={settings.backgroundRotation || 0}
-                  onChange={(e) => update({ backgroundRotation: Number(e.target.value) })}
-                  className="flex-1 accent-[var(--accent-color)] h-1 bg-white/10 rounded-lg appearance-none cursor-pointer"
-                />
-                <span className="text-xs font-mono text-white min-w-10 text-right">{settings.backgroundRotation || 0}°</span>
-              </div>
-            </div>
-
-            {/* Change Password Card */}
+            {/* SECTION 2: DATABASE & TELEMETRY INTEGRATION */}
             <div className="p-4 bg-white/5 border border-white/10 rounded-2xl space-y-3">
-              <h4 className="text-xs font-bold text-gray-300 flex items-center gap-1.5">
-                <span className="material-symbols-outlined text-sm" style={{ color: 'var(--accent-color)' }}>key</span>
-                {t.devicePasswordTitle}
+              <h4 className="text-xs font-bold text-white flex items-center gap-1.5 border-b border-white/5 pb-2">
+                <span className="material-symbols-outlined text-sm" style={{ color: 'var(--accent-color)' }}>database</span>
+                {lang === 'en' ? 'Database & Telemetry Logs' : lang === 'hi' ? 'डेटाबेस और टेलीमेट्री लॉग' : 'ডাটাবেস ও টেলিমেট্রি লগ'}
               </h4>
-              <p className="text-[10px] text-gray-400 leading-normal">
-                {lang === 'en' ? `Update the authentication password for the active controller (${getActiveDeviceId()}). The old password will be invalidated immediately.` : lang === 'hi' ? `सक्रिय कंट्रोलर (${getActiveDeviceId()}) के लिए प्रमाणीकरण पासवर्ड अपडेट करें। पुराना पासवर्ड तुरंत अमान्य हो जाएगा।` : `সক্রিয় নিয়ন্ত্রকের (${getActiveDeviceId()}) জন্য প্রমাণীকরণ পাসওয়ার্ড আপডেট করুন। পুরানো পাসওয়ার্ড অবিলম্বে বাতিল হয়ে যাবে।`}
-              </p>
-              <div className="space-y-2">
-                <input
-                  type="password"
-                  value={newPassInput}
-                  onChange={(e) => setNewPassInput(e.target.value)}
-                  placeholder={lang === 'en' ? 'New Password (min 6 characters)' : lang === 'hi' ? 'नया पासवर्ड (न्यूनतम ६ अक्षर)' : 'নতুন পাসওয়ার্ড (কমপক্ষে ৬ টি অক্ষর)'}
-                  className="w-full bg-[#1c1e14] border border-white/10 rounded-xl px-3 py-2 text-xs focus:ring-[var(--accent-color)] text-white focus:outline-none"
-                />
-                <button
-                  onClick={async () => {
-                    if (!newPassInput.trim() || newPassInput.trim().length < 6) {
-                      alert(lang === 'en' ? 'Password must be at least 6 characters long' : lang === 'hi' ? 'पासवर्ड कम से कम ६ अक्षरों का होना चाहिए' : 'পাসওয়ার্ড কমপক্ষে ৬ টি অক্ষর দীর্ঘ হতে হবে');
-                      return;
-                    }
-                    try {
-                      const url = endpoint('device-change-password');
-                      const res = await fetchJson(url, {
-                        method: 'POST',
-                        body: JSON.stringify({ new_password: newPassInput.trim() })
-                      });
-                      alert(res.message || (lang === 'en' ? 'Password changed successfully!' : lang === 'hi' ? 'पासवर्ड सफलतापूर्वक बदल गया!' : 'পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে!'));
-                      setNewPassInput('');
-                    } catch (err) {
-                      alert(`Failed to change password: ${err.message}`);
-                    }
-                  }}
-                  className="w-full text-xs py-2 rounded-xl font-bold cursor-pointer transition-all bg-[var(--accent-color)] text-black"
-                >
-                  {t.changePasswordBtn}
-                </button>
+              
+              <div className="space-y-3">
+                <div>
+                  <label className="text-[11px] text-gray-400 block mb-1 font-bold">{t.supabaseUrl}</label>
+                  <input
+                    type="text"
+                    value={settings.supabaseUrl || ''}
+                    onChange={(e) => update({ supabaseUrl: e.target.value })}
+                    className="w-full bg-[#1c1e14] border border-white/10 rounded-xl px-4 py-2.5 text-xs focus:ring-[var(--accent-color)] text-gray-300 focus:outline-none"
+                    placeholder="https://yourproj.supabase.co"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[11px] text-gray-400 block mb-1 font-bold">{t.supabaseAnonKey}</label>
+                  <input
+                    type="password"
+                    value={settings.supabaseAnonKey || ''}
+                    onChange={(e) => {
+                      update({ supabaseAnonKey: e.target.value });
+                      localStorage.setItem('plantai_supabase_key', e.target.value);
+                    }}
+                    className="w-full bg-[#1c1e14] border border-white/10 rounded-xl px-4 py-2.5 text-xs focus:ring-[var(--accent-color)] text-gray-300 focus:outline-none"
+                    placeholder={lang === 'en' ? 'Can be added later' : lang === 'hi' ? 'बाद में जोड़ा जा सकता है' : 'পরে যোগ করা যাবে'}
+                  />
+                  <button
+                    onClick={() => {
+                      localStorage.setItem('plantai_supabase_url', settings.supabaseUrl || '');
+                      localStorage.setItem('plantai_supabase_key', settings.supabaseAnonKey || '');
+                      window.location.reload();
+                    }}
+                    className="mt-2 text-[10px] px-3 py-1.5 rounded-lg font-bold cursor-pointer hover:scale-105 transition-all bg-[var(--accent-color)] text-black"
+                  >
+                    {lang === 'en' ? 'Apply & Reload Page' : lang === 'hi' ? 'लागू करें और पृष्ठ रीलोड करें' : 'প্রয়োগ করুন এবং পৃষ্ঠা পুনরায় লোড করুন'}
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-[10px] text-gray-400 block mb-1 font-bold">{t.logIntervalLabel}</label>
+                    <input
+                      type="number"
+                      value={settings.sensorInterval || 30}
+                      onChange={(e) => update({ sensorInterval: Number(e.target.value) })}
+                      className="w-full bg-[#1c1e14] border border-white/10 rounded-xl px-3 py-2 text-xs focus:ring-[var(--accent-color)] text-gray-300 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] text-gray-400 block mb-1 font-bold">{t.averageMinutesLabel}</label>
+                    <select
+                      value={settings.historyAverageMinutes || 15}
+                      onChange={(e) => update({ historyAverageMinutes: Number(e.target.value) })}
+                      className="w-full bg-[#1c1e14] border border-white/10 rounded-xl px-3 py-2 text-xs focus:ring-[var(--accent-color)] text-white focus:outline-none"
+                    >
+                      <option value={1} className="bg-[#13140f]">{lang === 'en' ? 'Raw (1m)' : lang === 'hi' ? 'Raw (1m)' : 'Raw (1m)'}</option>
+                      <option value={5} className="bg-[#13140f]">5 Min</option>
+                      <option value={15} className="bg-[#13140f]">15 Min</option>
+                      <option value={30} className="bg-[#13140f]">30 Min</option>
+                      <option value={60} className="bg-[#13140f]">1 Hour</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-[10px] text-gray-400 block mb-1 font-bold">{t.sensorsTableLabel}</label>
+                    <input
+                      type="text"
+                      value={settings.dbSensorsTable || 'sensor_readings'}
+                      onChange={(e) => update({ dbSensorsTable: e.target.value })}
+                      className="w-full bg-[#1c1e14] border border-white/10 rounded-xl px-3 py-2 text-xs focus:ring-[var(--accent-color)] text-gray-300 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] text-gray-400 block mb-1 font-bold">{t.settingsTableLabel}</label>
+                    <input
+                      type="text"
+                      value={settings.dbSettingsTable || 'system_settings'}
+                      onChange={(e) => update({ dbSettingsTable: e.target.value })}
+                      className="w-full bg-[#1c1e14] border border-white/10 rounded-xl px-3 py-2 text-xs focus:ring-[var(--accent-color)] text-gray-300 focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-[10px] text-gray-400 block mb-1 font-bold">{lang === 'en' ? 'Chart Curve Style' : lang === 'hi' ? 'चार्ट वक्र शैली' : 'চার্ট কার্ভ স্টাইল'}</label>
+                    <select
+                      value={settings.chartCurve || 'smooth'}
+                      onChange={(e) => update({ chartCurve: e.target.value })}
+                      className="w-full bg-[#1c1e14] border border-white/10 rounded-xl px-3 py-2 text-xs focus:ring-[var(--accent-color)] text-white focus:outline-none"
+                    >
+                      <option value="smooth" className="bg-[#13140f]">Smooth</option>
+                      <option value="straight" className="bg-[#13140f]">Straight</option>
+                      <option value="stepped" className="bg-[#13140f]">Stepped</option>
+                    </select>
+                  </div>
+                  <div className="flex flex-col justify-end pb-1.5">
+                    <label className="text-[10px] text-gray-400 mb-1.5 font-bold flex items-center justify-between cursor-pointer select-none w-full">
+                      <span>{lang === 'en' ? 'Mock Offline Data' : lang === 'hi' ? 'नकली ऑफ़लाइन डेटा' : 'মক অফলাইন ডেটা'}</span>
+                      <Switch
+                        selected={settings.virtualDataMock || false}
+                        onSelectionChange={(checked) => update({ virtualDataMock: checked })}
+                        aria-label="Mock Offline Data"
+                      >
+                        {({ isSelected }) => (
+                          <Switch.Content>
+                            <Switch.Control className={`h-[24px] w-[44px] rounded-full transition-colors flex items-center ${isSelected ? 'bg-[var(--accent-color)] shadow-[0_0_12px_rgba(212,255,0,0.4)]' : 'bg-white/10'}`}>
+                              <Switch.Thumb className={`size-[18px] rounded-full bg-white transition-all ${isSelected ? 'translate-x-[22px]' : 'translate-x-[2px]'}`} />
+                            </Switch.Control>
+                          </Switch.Content>
+                        )}
+                      </Switch>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-[10px] text-gray-400 block mb-1 font-bold">{lang === 'en' ? 'Background Animation Rotation' : lang === 'hi' ? 'पृष्ठभूमि रोटेशन (डिग्री)' : 'পটভূমি ঘূর্ণন (ডিগ্রী)'}</label>
+                  <div className="flex items-center gap-3 bg-[#1c1e14] border border-white/10 rounded-xl px-3 py-2">
+                    <input
+                      type="range"
+                      min="0"
+                      max="360"
+                      value={settings.backgroundRotation || 0}
+                      onChange={(e) => update({ backgroundRotation: Number(e.target.value) })}
+                      className="flex-1 accent-[var(--accent-color)] h-1 bg-white/10 rounded-lg appearance-none cursor-pointer"
+                    />
+                    <span className="text-[10px] font-mono text-white min-w-10 text-right">{settings.backgroundRotation || 0}°</span>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Log Out Button */}
-            <button
-              onClick={async () => {
-                const token = localStorage.getItem('plantify_user_token');
-                const url = (settings.supabaseUrl || import.meta.env.VITE_SUPABASE_URL || '').replace(/\/$/, '');
-                const key = settings.supabaseAnonKey || import.meta.env.VITE_SUPABASE_ANON_KEY || '';
-                if (token && url) {
-                  await fetch(`${url}/auth/v1/logout`, {
-                    method: 'POST',
-                    headers: { 'apikey': key, 'Authorization': `Bearer ${token}` }
-                  }).catch(() => {});
-                }
-                localStorage.removeItem('plantify_user_token');
-                localStorage.removeItem('plantify_user_email');
-                window.location.reload();
-              }}
-              className="w-full py-3 border border-red-900/30 hover:bg-red-950/20 text-red-400 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5"
-            >
-              <span className="material-symbols-outlined text-sm">logout</span>
-              {lang === 'en' ? 'Log Out of Controller' : lang === 'hi' ? 'कंट्रोलर से लॉग आउट करें' : 'কন্ট্রোলার থেকে লগ আউট'}
-            </button>
+            {/* SECTION 3: ACCOUNT & PASSWORD SECURITY */}
+            <div className="p-4 bg-white/5 border border-white/10 rounded-2xl space-y-3">
+              <h4 className="text-xs font-bold text-white flex items-center gap-1.5 border-b border-white/5 pb-2">
+                <span className="material-symbols-outlined text-sm" style={{ color: 'var(--accent-color)' }}>security</span>
+                {lang === 'en' ? 'Account Security' : lang === 'hi' ? 'खाता सुरक्षा' : 'অ্যাকাউন্ট নিরাপত্তা'}
+              </h4>
+              
+              <div className="space-y-3">
+                <div className="space-y-1.5">
+                  <label className="text-[10px] text-gray-400 block font-bold">{t.devicePasswordTitle}</label>
+                  <p className="text-[9px] text-gray-500 leading-normal">
+                    {lang === 'en' ? `Update credentials for the active controller (${getActiveDeviceId()}).` : lang === 'hi' ? `सक्रिय कंट्रोलर (${getActiveDeviceId()}) के क्रेडेंशियल अपडेट करें।` : `সক্রিয় নিয়ন্ত্রকের (${getActiveDeviceId()}) জন্য শংসাপত্র আপডেট করুন।`}
+                  </p>
+                  <div className="flex gap-2">
+                    <input
+                      type="password"
+                      value={newPassInput}
+                      onChange={(e) => setNewPassInput(e.target.value)}
+                      placeholder={lang === 'en' ? 'Min 6 characters' : lang === 'hi' ? 'न्यूनतम ६ अक्षर' : 'কমপক্ষে ৬ টি অক্ষর'}
+                      className="flex-1 bg-[#1c1e14] border border-white/10 rounded-xl px-3 py-2 text-xs focus:ring-[var(--accent-color)] text-white focus:outline-none"
+                    />
+                    <button
+                      onClick={async () => {
+                        if (!newPassInput.trim() || newPassInput.trim().length < 6) {
+                          alert(lang === 'en' ? 'Password must be at least 6 characters long' : lang === 'hi' ? 'पासवर्ड कम से कम ६ अक्षरों का होना चाहिए' : 'পাসওয়ার্ড কমপক্ষে ৬ টি অক্ষর দীর্ঘ হতে হবে');
+                          return;
+                        }
+                        try {
+                          const url = endpoint('device-change-password');
+                          const res = await fetchJson(url, {
+                            method: 'POST',
+                            body: JSON.stringify({ new_password: newPassInput.trim() })
+                          });
+                          alert(res.message || (lang === 'en' ? 'Password changed successfully!' : lang === 'hi' ? 'पासवर्ड सफलतापूर्वक बदल गया!' : 'পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে!'));
+                          setNewPassInput('');
+                        } catch (err) {
+                          alert(`Failed to change password: ${err.message}`);
+                        }
+                      }}
+                      className="text-xs px-4 py-2 rounded-xl font-bold cursor-pointer transition-all bg-[var(--accent-color)] text-black"
+                    >
+                      {t.changePasswordBtn}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="pt-2 border-t border-white/5">
+                  <button
+                    onClick={async () => {
+                      if (!window.confirm(lang === 'en' ? 'Log out of Plantify?' : lang === 'hi' ? 'क्या आप लॉग आउट करना चाहते हैं?' : 'লগ আউট করতে চান?')) return;
+                      const token = localStorage.getItem('plantify_user_token');
+                      const url = (settings.supabaseUrl || import.meta.env.VITE_SUPABASE_URL || '').replace(/\/$/, '');
+                      const key = settings.supabaseAnonKey || import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+                      if (token && url) {
+                        await fetch(`${url}/auth/v1/logout`, {
+                          method: 'POST',
+                          headers: { 'apikey': key, 'Authorization': `Bearer ${token}` }
+                        }).catch(() => {});
+                      }
+                      localStorage.removeItem('plantify_user_token');
+                      localStorage.removeItem('plantify_user_email');
+                      window.location.reload();
+                    }}
+                    className="w-full py-2.5 border border-red-900/30 hover:bg-red-950/20 text-red-400 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                  >
+                    <span className="material-symbols-outlined text-sm">logout</span>
+                    {lang === 'en' ? 'Log Out of Controller' : lang === 'hi' ? 'कंट्रोलर से लॉग आउट करें' : 'কন্ট্রোলার থেকে লগ আউট'}
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -4202,12 +4231,12 @@ function Settings({ settings, setSettings, reloadWeather, weather }) {
 
             {loadingModels && (
               <div className="text-[11px] text-[var(--accent-color)] font-mono animate-pulse">
-                {lang === 'en' ? '🔄 Fetching models list from provider...' : lang === 'hi' ? '🔄 प्रदाता से मॉडलों की सूची प्राप्त की जा रही है...' : '🔄 প্রদানকারীর থেকে মডেল তালিকা আনা হচ্ছে...'}
+                <span className="flex items-center gap-1"><span className="material-symbols-outlined animate-spin" style={{fontSize:12}}>refresh</span>{lang === 'en' ? ' Fetching models...' : lang === 'hi' ? ' मॉडल आ रहे हैं...' : ' মডেল আসছে...'}</span>
               </div>
             )}
             {modelError && (
               <div className="text-[10px] text-red-400 font-mono">
-                {lang === 'en' ? '⚠️ API models query failed. Showing default model list.' : lang === 'hi' ? '⚠️ एपीआई मॉडल क्वेरी विफल। डिफ़ॉल्ट मॉडल सूची दिखा रहा है।' : '⚠️ API মডেল কোয়েরি ব্যর্থ। ডিফল্ট মডেল তালিকা দেখানো হচ্ছে।'}
+                <span className="flex items-center gap-1"><span className="material-symbols-outlined" style={{fontSize:11}}>warning</span>{lang === 'en' ? ' Query failed. Using defaults.' : lang === 'hi' ? ' क्वेरी विफल। डिफ़ॉल्ट दिखा रहे हैं।' : ' ব্যর্থ। ডিফল্ট দেখানো হচ্ছে।'}</span>
               </div>
             )}
 
@@ -5583,7 +5612,7 @@ export default function App() {
             .catch(err => console.error('Auto-watering failure:', err));
         }
       } else {
-        setToastMsg(`⚠️ Warning: Soil moisture critically low (${m}%)!`);
+        setToastMsg(`Soil moisture critically low (${m}%) — check irrigation`);
       }
       const tId = setTimeout(() => setToastMsg(null), 5000);
       return () => clearTimeout(tId);
@@ -5777,59 +5806,234 @@ export default function App() {
       </footer>
 
       {/* Legal Agreement Modal */}
-      {(showTerms || showPrivacy) && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center p-4 z-[999] animate-fade-in">
-          <div className="w-full max-w-sm bg-[rgba(30,32,26,0.95)] backdrop-blur-2xl rounded-[30px] border border-white/10 p-6 shadow-2xl flex flex-col max-h-[80vh]">
-            <div className="flex justify-between items-center mb-4 pb-2 border-b border-white/10">
-              <h3 className="serif-title text-xl font-bold" style={{ color: 'var(--accent-color)' }}>
-                {showTerms ? 'Terms & Conditions' : 'Privacy Policy'}
-              </h3>
-              <button 
-                onClick={() => { setShowTerms(false); setShowPrivacy(false); }} 
-                className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white cursor-pointer"
-              >
-                <span className="material-symbols-outlined text-base">close</span>
-              </button>
+      {(() => {
+        if (!showTerms && !showPrivacy) return null;
+        const Sec = ({ title, children }) => (
+          <div className="mt-5">
+            <div className="flex items-start gap-2 mb-2">
+              <div className="w-0.5 h-4 rounded-full flex-shrink-0 mt-0.5" style={{background:'var(--accent-color)'}}/>
+              <h4 className="font-bold text-white text-xs leading-tight">{title}</h4>
             </div>
-            
-            <div className="overflow-y-auto text-xs text-gray-300 space-y-4 pr-1 leading-relaxed text-left font-sans custom-scrollbar select-text">
-              {showTerms ? (
-                <>
-                  <p className="font-bold text-sm" style={{ color: 'var(--accent-color)' }}>Governing Law: India</p>
-                  <p>Welcome to Plantify. By using our website, device, or services, you agree to these Terms. Please read them carefully.</p>
-                  
-                  <h4 className="font-bold text-[#e4e3da] mt-3">1. Use of Service & AI Advice</h4>
-                  <p>Plantify provides smart agronomy recommendations, care charts, and automated water schedules using local sensor telemetry and AI logic. All advice and schedules generated by Plantify are for guidance and reference purposes only. Users must manually verify physical crop and soil conditions before taking action.</p>
-                  
-                  <h4 className="font-bold text-[#e4e3da] mt-3">2. Agricultural Advisory Disclaimer</h4>
-                  <p>We do not guarantee crop yields, pest prevention, or specific agricultural outcomes. Under no circumstances shall Plantify be liable for crop failure, hardware damage, or other operational losses resulting from the use or reliance on AI recommendations.</p>
-                  
-                  <h4 className="font-bold text-[#e4e3da] mt-3">3. Account & Device Security</h4>
-                  <p>You are responsible for safeguarding your Supabase accounts, device identification tokens, and passwords. Any unauthorized access must be reported immediately.</p>
-                  
-                  <p className="text-[10px] text-gray-500 mt-4">Last Updated: July 2026</p>
-                </>
-              ) : (
-                <>
-                  <p className="font-bold text-sm" style={{ color: 'var(--accent-color)' }}>Data Scope: Anonymous Telemetry</p>
-                  <p>Your privacy is highly important to us. This policy describes how Plantify processes and stores your information.</p>
-                  
-                  <h4 className="font-bold text-[#e4e3da] mt-3">1. Information We Collect</h4>
-                  <p>We collect hardware IoT telemetry data (including soil moisture, ambient temperature, humidity, and NPK levels) uploaded by your ESP32 controller. We also store your selected crop type, planting date, and regional Mandi preference.</p>
-                  
-                  <h4 className="font-bold text-[#e4e3da] mt-3">2. Location Data</h4>
-                  <p>To provide relevant agricultural pricing, location data is parsed and stored only at the district level. Precise coordinates are kept strictly locally in your browser storage.</p>
-                  
-                  <h4 className="font-bold text-[#e4e3da] mt-3">3. Service Improvement</h4>
-                  <p>Fully anonymous user data and agricultural profiles may be used to calibrate agronomy models, analyze price trends, and improve overall system intelligence.</p>
-                  
-                  <p className="text-[10px] text-gray-500 mt-4">Last Updated: July 2026</p>
-                </>
-              )}
+            <div className="text-[11px] text-gray-400 leading-[1.75] pl-2.5 space-y-2">{children}</div>
+          </div>
+        );
+        const Note = ({ children }) => (
+          <div className="bg-white/3 border border-white/8 rounded-xl px-3 py-2.5 mt-2 text-[10.5px] text-gray-500 leading-relaxed italic">{children}</div>
+        );
+        return (
+          <div
+            className="fixed inset-0 bg-black/75 backdrop-blur-md flex items-end sm:items-center justify-center p-3 z-[999]"
+            style={{animation:'fadeIn 0.2s ease both'}}
+            onClick={(e) => { if (e.target === e.currentTarget) { setShowTerms(false); setShowPrivacy(false); } }}
+          >
+            <div className="w-full max-w-lg bg-[#131508] border border-white/10 rounded-t-[28px] sm:rounded-[28px] shadow-2xl flex flex-col" style={{maxHeight:'92vh'}}>
+              <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b border-white/8 flex-shrink-0">
+                <div>
+                  <h2 className="font-bold text-sm text-white tracking-tight flex items-center gap-1.5">
+                    <span className="material-symbols-outlined flex-shrink-0" style={{fontSize:15,color:'var(--accent-color)'}}>{showTerms ? 'gavel' : 'privacy_tip'}</span>
+                    {showTerms ? 'Terms & Conditions' : 'Privacy Policy'}
+                  </h2>
+                  <p className="text-[10px] text-gray-500 mt-0.5">Plantify IoT · Effective 18 July 2026 · Governing Law: Republic of India</p>
+                </div>
+                <button onClick={() => { setShowTerms(false); setShowPrivacy(false); }} className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white cursor-pointer border border-white/10 transition-colors">
+                  <span className="material-symbols-outlined" style={{fontSize:16}}>close</span>
+                </button>
+              </div>
+              <div className="flex px-5 pt-3 pb-1 gap-2 flex-shrink-0">
+                <button onClick={() => { setShowTerms(true); setShowPrivacy(false); }}
+                  className="flex-1 py-2 rounded-xl text-xs font-bold cursor-pointer transition-all"
+                  style={showTerms ? {background:'var(--accent-color)',color:'#000'} : {background:'rgba(255,255,255,0.05)',color:'#6b7280'}}>
+                  Terms &amp; Conditions
+                </button>
+                <button onClick={() => { setShowPrivacy(true); setShowTerms(false); }}
+                  className="flex-1 py-2 rounded-xl text-xs font-bold cursor-pointer transition-all"
+                  style={showPrivacy ? {background:'var(--accent-color)',color:'#000'} : {background:'rgba(255,255,255,0.05)',color:'#6b7280'}}>
+                  Privacy Policy
+                </button>
+              </div>
+              <div className="overflow-y-auto px-5 py-2 pb-6 text-left select-text flex-1">
+                {showTerms ? (
+                  <>
+                    <p className="text-[11px] text-gray-300 leading-relaxed mt-3 mb-1">
+                      Please read these Terms and Conditions carefully before using the <strong className="text-white">Plantify</strong> smart farming platform, mobile web application, IoT firmware interface, or any associated API service. By registering an account or connecting a device, you agree to be legally bound by these Terms.
+                    </p>
+                    <Note>Last updated 18 July 2026. Continued use after updates constitutes acceptance of the revised Terms.</Note>
+
+                    <Sec title="1. Parties & Acceptance">
+                      <p>This Agreement is between <strong className="text-gray-300">you</strong> ("User", "Farmer", "Operator") and the <strong className="text-gray-300">Plantify Development Team</strong> ("Plantify", "we", "our"). You represent that you are at least 18 years of age, have legal capacity to enter this agreement, and all registration information you provide is accurate and complete.</p>
+                    </Sec>
+
+                    <Sec title="2. Description of the Plantify Service">
+                      <p>Plantify is a precision agriculture platform combining IoT sensors, real-time analytics, AI agronomic advisory, and market intelligence:</p>
+                      <p>• <strong className="text-gray-300">IoT Dashboard:</strong> Real-time soil moisture, temperature, humidity, NPK, and relay status visualization with trend charts.</p>
+                      <p>• <strong className="text-gray-300">AI Care Plan Generator:</strong> Crop management recommendations based on live sensor telemetry and crop-specific growth profiles.</p>
+                      <p>• <strong className="text-gray-300">AI Advisor Chat:</strong> Conversational AI for plant disease diagnosis from photos and step-by-step agronomic guidance (English, Hindi, Bengali).</p>
+                      <p>• <strong className="text-gray-300">Yield Predictor:</strong> Algorithmic crop yield estimation based on field area, crop type, and sensor health factors.</p>
+                      <p>• <strong className="text-gray-300">Mandi Market Tracker:</strong> Integration with Agmarknet (data.gov.in) for wholesale commodity pricing across Indian mandis.</p>
+                      <p>• <strong className="text-gray-300">Automated Irrigation Controller:</strong> Threshold-based relay control with weather-condition safety interlocks.</p>
+                      <p>• <strong className="text-gray-300">Weather Integration:</strong> GPS-based Open-Meteo weather data for contextualizing sensor readings.</p>
+                    </Sec>
+
+                    <Sec title="3. Agricultural Advisory & AI Disclaimer">
+                      <p><strong className="text-white">This is the most important section. Please read it fully.</strong></p>
+                      <p>All care plans, watering schedules, fertilization guidance, yield estimates, and other agronomic content are provided for <strong className="text-white">informational and reference purposes only</strong>. They do not constitute professional agricultural advice. Plantify makes no warranties regarding accuracy, crop yields, pest prevention, or financial returns. You must independently verify all recommendations with qualified agronomists and conduct physical field inspections before taking action.</p>
+                      <p>AI systems are probabilistic and may produce incorrect outputs. AI diagnoses must be corroborated with laboratory testing where crop loss risk is high.</p>
+                    </Sec>
+
+                    <Sec title="4. Device, Hardware & Automated Control Responsibility">
+                      <p>You are solely responsible for correct installation, calibration, and safety of all ESP32, sensor, relay, and pump hardware. Improper installation can cause electrical hazards, equipment damage, or crop loss. The automated irrigation system can activate physical equipment without user intervention — Plantify is not responsible for any consequences including over-irrigation, flooding, or pump damage.</p>
+                    </Sec>
+
+                    <Sec title="5. Account Registration, Credentials & Security">
+                      <p>You are responsible for maintaining confidentiality of all credentials including Supabase project URL, anon key, service role key, and API keys. Immediately rotate all keys and notify the system administrator if you suspect unauthorized access. If hardware is involved, physically disconnect relay-controlled equipment until security is restored.</p>
+                    </Sec>
+
+                    <Sec title="6. User Conduct & Prohibited Activities">
+                      <p>You may not: upload false sensor data; reverse engineer the application; use bots or scrapers; probe for security vulnerabilities; transmit malware through connected devices; use the Service for non-agricultural commercial surveillance; or use the Service in violation of applicable Indian law including the IT Act 2000, DPDP Act 2023, or the Indian Penal Code.</p>
+                    </Sec>
+
+                    <Sec title="7. AI Provider Integration & Third-Party API Use">
+                      <p>Plantify supports OpenAI, Anthropic, Google Gemini, Groq, OpenRouter, and custom endpoints. By configuring any AI provider, you agree to comply with that provider's Terms of Service. Your sensor context data transmitted to AI providers is subject to their respective privacy policies.</p>
+                      <Note>OpenAI: openai.com/policies · Gemini: ai.google.dev/terms · Groq: groq.com/legal/terms-of-use</Note>
+                    </Sec>
+
+                    <Sec title="8. Mandi Data, Market Prices & Financial Decisions">
+                      <p>Commodity pricing from Agmarknet is provided for information only and may be delayed or inaccurate. Do not use Mandi price data as the sole basis for crop selling decisions, loan applications, or financial commitments. Consult your local Mandi committee or agricultural bank before significant financial decisions.</p>
+                    </Sec>
+
+                    <Sec title="9. Intellectual Property Rights">
+                      <p>All Plantify source code, UI designs, AI prompt engineering, data pipeline design, and written content are the exclusive intellectual property of the Plantify Development Team, protected under the Copyright Act 1957 (India), IT Act 2000, and international copyright treaties. You receive a limited, non-transferable, revocable license for personal agricultural use only. You may not reproduce, sublicense, sell, or create derivative works without written consent.</p>
+                    </Sec>
+
+                    <Sec title="10. Service Availability, Downtime & Modifications">
+                      <p>Plantify does not guarantee uninterrupted availability. The Service may be unavailable due to maintenance, Supabase outages, API limits, or force majeure. Plantify may modify, suspend, or discontinue any feature at any time.</p>
+                    </Sec>
+
+                    <Sec title="11. Limitation of Liability & Indemnification">
+                      <p><strong className="text-gray-300">Limitation:</strong> To the maximum extent permitted by law, Plantify shall not be liable for crop failure, yield loss, soil damage, equipment damage, financial loss from Mandi data, sensor data loss, or any indirect, consequential, or punitive damages. Total liability shall not exceed INR 1,000 (One Thousand Indian Rupees).</p>
+                      <p><strong className="text-gray-300">Indemnification:</strong> You agree to indemnify and hold harmless Plantify and its team from any claims arising from your violation of these Terms, misuse of the Service, or violation of third-party rights.</p>
+                    </Sec>
+
+                    <Sec title="12. Disclaimer of Warranties">
+                      <p>THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTY OF ANY KIND. PLANTIFY EXPRESSLY DISCLAIMS ALL IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR AGRICULTURAL PURPOSE, AND NON-INFRINGEMENT.</p>
+                    </Sec>
+
+                    <Sec title="13. Termination">
+                      <p>Either party may terminate at any time. You may terminate by clearing all localStorage data and ceasing use. Plantify may terminate or suspend access immediately for breach. Your Supabase project data remains under your control and is not deleted by Plantify. Sections 3, 9, 11, 12, and 14 survive termination.</p>
+                    </Sec>
+
+                    <Sec title="14. Governing Law, Jurisdiction & Dispute Resolution">
+                      <p>These Terms are governed by the laws of the Republic of India. Parties agree to attempt good-faith informal resolution within 30 days of notice. Unresolved disputes shall be settled by binding arbitration under the Arbitration and Conciliation Act, 1996, seated in New Delhi, India.</p>
+                    </Sec>
+
+                    <Sec title="15. Miscellaneous">
+                      <p>These Terms constitute the entire agreement between you and Plantify. If any provision is unenforceable, the remaining provisions remain in full force. Failure to enforce any right is not a waiver. You may not assign these Terms without consent. <strong className="text-gray-300">Contact:</strong> Plantify Development Team · India</p>
+                    </Sec>
+
+                    <div className="mt-6 pt-4 border-t border-white/8 text-[10px] text-gray-600 leading-relaxed">
+                      <p>Last Updated: 18 July 2026 · Version 2.0.0 · Applicable: IT Act 2000 · DPDP Act 2023 · Arbitration &amp; Conciliation Act 1996 · Copyright Act 1957</p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-[11px] text-gray-300 leading-relaxed mt-3 mb-1">
+                      This Privacy Policy describes how <strong className="text-white">Plantify</strong> collects, processes, and protects your personal data. We comply with India's <strong className="text-white">Digital Personal Data Protection Act, 2023 (DPDP Act)</strong> and the Information Technology Act, 2000.
+                    </p>
+                    <Note>Plantify uses a "local-first" architecture. The vast majority of your data is stored in your browser and your own Supabase project — not on Plantify servers.</Note>
+
+                    <Sec title="1. Data Controller & Contact Information">
+                      <p>The data controller is the <strong className="text-gray-300">Plantify Development Team</strong>, an independent agricultural technology developer based in India. For privacy inquiries, submit a request with subject line: <strong className="text-gray-300">"DPDP Data Request — [Your Email]"</strong>. We respond within 30 days as required by the DPDP Act, 2023.</p>
+                    </Sec>
+
+                    <Sec title="2. Categories of Personal Data We Process">
+                      <p><strong className="text-gray-300">Account Data (Supabase only):</strong> Email, hashed password, JWT tokens, creation/login timestamps.</p>
+                      <p><strong className="text-gray-300">IoT Telemetry (your Supabase database):</strong> Soil moisture, temperature, humidity, NPK concentrations, relay status, device heartbeat logs — tagged only with device ID and UTC timestamp.</p>
+                      <p><strong className="text-gray-300">Farm Profile (browser localStorage):</strong> Crop type, planting date, field area, soil type, irrigation method, Mandi preference, auto-watering thresholds.</p>
+                      <p><strong className="text-gray-300">Location Data (browser localStorage):</strong> GPS coordinates are stored locally and transmitted only to Open-Meteo's weather API. They are never sent to Plantify servers.</p>
+                      <p><strong className="text-gray-300">AI Chat Data (not stored by Plantify):</strong> Messages and photos are transmitted directly to your configured AI provider. AI responses are stored only in your browser's localStorage.</p>
+                      <p><strong className="text-gray-300">Analytics:</strong> Zero. Plantify contains no analytics SDK, tracking cookies, or session recording.</p>
+                    </Sec>
+
+                    <Sec title="3. Legal Basis for Processing (DPDP Act, 2023)">
+                      <p>• <strong className="text-gray-300">Consent:</strong> Account registration, GPS location, AI integrations.</p>
+                      <p>• <strong className="text-gray-300">Contract Performance:</strong> Email/password processing for authentication.</p>
+                      <p>• <strong className="text-gray-300">Legitimate Interests:</strong> De-identified sensor data patterns to improve AI crop models.</p>
+                    </Sec>
+
+                    <Sec title="4. How We Use Your Information">
+                      <p>• Authentication and account access</p>
+                      <p>• Dashboard visualization of sensor telemetry</p>
+                      <p>• Local yield prediction computation</p>
+                      <p>• AI care plan generation (transmitted to your AI provider)</p>
+                      <p>• Automated irrigation threshold comparison</p>
+                      <p>• Mandi market price queries via Agmarknet API</p>
+                    </Sec>
+
+                    <Sec title="5. Data Storage Architecture & Retention">
+                      <p><strong className="text-gray-300">Browser (localStorage):</strong> Farm profile, settings, chat history, care plans, JWT tokens. Permanently deleted if you clear browser storage.</p>
+                      <p><strong className="text-gray-300">Your Supabase Project:</strong> All sensor telemetry and account credentials. Plantify has no access to your database without your credentials.</p>
+                      <p><strong className="text-gray-300">Retention:</strong> Sensor readings retained until you delete them. JWT tokens expire as configured in Supabase.</p>
+                    </Sec>
+
+                    <Sec title="6. Data Sharing & Third-Party Disclosure">
+                      <p>Plantify does not sell, rent, or share your personal data for commercial purposes. Data is shared only with:</p>
+                      <p>• <strong className="text-gray-300">Supabase:</strong> Your project infrastructure (subject to Supabase Privacy Policy)</p>
+                      <p>• <strong className="text-gray-300">AI Providers:</strong> Sensor context sent when using AI advisor or care plan generator</p>
+                      <p>• <strong className="text-gray-300">Open-Meteo:</strong> Coordinates sent for weather data</p>
+                      <p>• <strong className="text-gray-300">Agmarknet / data.gov.in:</strong> Crop type and state in public market API requests</p>
+                    </Sec>
+
+                    <Sec title="7. Cookies, Tracking & Analytics">
+                      <p>Plantify uses <strong className="text-white">zero tracking cookies</strong>. No Google Analytics, Meta Pixel, Hotjar, or any behavioral analytics SDK is present in the application.</p>
+                    </Sec>
+
+                    <Sec title="8. Data Security Measures">
+                      <p>• TLS 1.2+ encryption in transit (HTTPS)</p>
+                      <p>• Passwords hashed by Supabase Auth before storage</p>
+                      <p>• Anon key limited-privilege with Row Level Security (RLS) enforced</p>
+                      <p>• No API keys or tokens in URL query strings</p>
+                      <Note>If you discover a security vulnerability, please report it responsibly to the system administrator. Do not publicly disclose it until we have had a reasonable opportunity to address it.</Note>
+                    </Sec>
+
+                    <Sec title="9. Your Rights Under the DPDP Act, 2023">
+                      <p>• <strong className="text-gray-300">Right to Access (§11):</strong> Request a summary of your personal data processed.</p>
+                      <p>• <strong className="text-gray-300">Right to Correction (§12):</strong> Correct inaccurate data via the Settings interface.</p>
+                      <p>• <strong className="text-gray-300">Right to Erasure (§12):</strong> Clear browser localStorage, delete your Supabase project, and request account deletion.</p>
+                      <p>• <strong className="text-gray-300">Right to Withdraw Consent (§6):</strong> Delete your data and discontinue use at any time.</p>
+                      <p>• <strong className="text-gray-300">Right to Grievance Redressal (§13):</strong> Unresolved grievances may be escalated to the Data Protection Board of India.</p>
+                    </Sec>
+
+                    <Sec title="10. International Data Transfers">
+                      <p>By using Supabase projects or AI endpoints outside India, your data may be transferred internationally. You consent to such transfers by configuring these integrations.</p>
+                    </Sec>
+
+                    <Sec title="11. Children's Privacy">
+                      <p>The Service is exclusively for adults (18+). If you believe a minor has provided personal information, please clear browser storage and delete the associated Supabase project.</p>
+                    </Sec>
+
+                    <Sec title="12. Data Breach Notification">
+                      <p>In the event of a personal data breach, we will notify affected users and the Data Protection Board of India within 72 hours of becoming aware, as required by the DPDP Act, 2023.</p>
+                    </Sec>
+
+                    <Sec title="13. Automated Decision-Making">
+                      <p>Automated processing occurs for auto-irrigation relay activation and AI crop recommendations. You retain manual override control and may opt-out by disabling these features in Settings.</p>
+                    </Sec>
+
+                    <Sec title="14. Changes to This Privacy Policy">
+                      <p>We may update this Policy from time to time. Continued use of the Service after revision constitutes acceptance of the updated Policy.</p>
+                    </Sec>
+
+                    <div className="mt-6 pt-4 border-t border-white/8 text-[10px] text-gray-600 leading-relaxed">
+                      <p>Last Updated: 18 July 2026 · Version 2.0.0 · Compliance: DPDP Act 2023 · IT Act 2000 · Indian Copyright Act 1957</p>
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
+
     </div>
   );
 }

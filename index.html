@@ -2,15 +2,20 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <meta name="theme-color" content="#13140f" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="manifest" href="./manifest.json" />
     <title>Plantify</title>
-    <!-- Google Fonts and Icons for Botanical Aesthetics -->
-    <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Nunito:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;600;700&family=Lora:ital,wght@0,400..700;1,400..700&family=Roboto:wght@300;400;500;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    <!-- Google Fonts — preconnect for faster DNS + TLS handshake -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Only load the fonts we actually use (trimmed from 9 families to 4) -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@400;700&family=Grand+Hotel&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <!-- Material Symbols — defer to not block render -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0" rel="stylesheet" /></noscript>
     <style>
       :root {
         --bg-color: #12140e;
@@ -31,6 +36,7 @@
         color: var(--text-color) !important;
         font-family: var(--font-body), 'Nunito', sans-serif !important;
         transition: background-color 0.3s ease, color 0.3s ease;
+        touch-action: pan-x pan-y;
       }
       
       /* Target header fonts explicitly */
@@ -39,7 +45,7 @@
       }
       
       /* Handle dynamic body sizes */
-      p, span, div, li, select, textarea, input, label {
+      p, span:not(.material-symbols-outlined), div, li, select, textarea, input, label {
         font-size: var(--size-body);
       }
       
@@ -49,6 +55,7 @@
       }
       .material-symbols-outlined {
         font-family: 'Material Symbols Outlined' !important;
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
       }
       h1, h2, h3, h4, h5, h6, .serif-title, .font-serif {
         font-family: var(--font-heading), 'Nunito', sans-serif !important;
